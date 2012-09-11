@@ -1,4 +1,4 @@
 django-guestbook
 ================
 
-Django-Guestbook
+see example at http://django-guestbook.com
