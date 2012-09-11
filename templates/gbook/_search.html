@@ -1,0 +1,79 @@
+{% load i18n %}
+
+<div style="display:block;text-align:left;width:1180px;padding-top:4px;">
+    <span style="cursor:pointer;text-decoration:underline;font:#779;font-size:12px;padding;background:#ececec;padding:6px;" id="show-search">
+        {% trans "Show search" %}
+    </span>
+    <span style="cursor:pointer;text-decoration:underline;font:#779;font-size:12px;padding;background:#ececec;padding:6px;display:none" id="hide-search">
+        {% trans "Hide search" %}
+    </span>
+</div>
+
+<script>
+    $(document).ready(function () {
+      var search = localStorage.getItem("show-search");
+      
+      if (search == 'yes') {
+        $(".search").css("display","block")
+          $("#hide-search").show()
+          $("#show-search").hide()
+        }
+
+      $("#show-search").click(function() {
+          $(".search").show()
+          $("#hide-search").show()
+          $("#show-search").hide()
+          localStorage.setItem("show-search", "yes");
+        })
+      $("#hide-search").click(function() {
+          $(".search").hide()
+          $("#hide-search").hide()
+          $("#show-search").show()
+          localStorage.setItem("show-search", "no");              
+        })            
+        });
+</script> 
+       
+<div class="search" style="display:none">
+    <form action="{% url gbook_search %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <span style="font-size:11px;color:#555;margin-right:24px;">
+            {% trans "Search string" %}:
+            {{ search_form.search_text }}
+        </span> 
+          
+        <span style="font-size:11px;color:#555;margin-right:24px;">
+            {% trans "Choose section" %}:
+            {{ search_form.show_section }}
+         </span>  
+            
+        {% if search_form.captcha %}
+            
+            <span style="font-size:11px;color:#555;margin-right:24px;">
+                Captcha:
+            </span>
+            
+            <span style="font-size:11px;color:#555;margin-right:24px;">
+                {{ search_form.captcha }}    
+            </span>
+            
+        {% endif %}
+        
+        <div style="display:block;margin-top:20px;">
+         
+            <div style="width:200px;">
+                {% autoescape off %} 
+                {{ search_form.search_text.errors }} 
+                {% endautoescape %}      
+                {% autoescape off %} 
+                {{ search_form.captcha.errors }} 
+                {% endautoescape %} 
+            </div>
+            
+            <input type="submit" id="submitData" value="{% trans "Show results" %}"> 
+            
+        </div>
+    </form>          
+</div>
+   

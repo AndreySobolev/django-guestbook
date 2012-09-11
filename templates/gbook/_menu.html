@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<a href="{% url gbook_view %}"/><img src="{{ MEDIA_URL }}/gbook/img/logotip.png" id="logotip" style="border:0px"></a>    
+<br>
+{% trans "You login as" %} <b>{{ user.username }}</b><br> 
+<div class="menu">
+  <a href="{% url gbook_view %}">{% trans "Guestbook" %}</a> 
+  <a href="{% url gbook_private_messages %}">{% trans "Personal messages" %}</a>
+  {% if new_private_messages.count > 0 %}
+      (<b>{{ new_private_messages.count }}</b>)
+  {% endif %} 
+  <a href="{% url gbook_my_karma %}">{% trans "Karma" %}</a>
+  <span style="font-family: Arial Bold; font-size:12px;margin-left:14px;margin-right:14px;">|</span>
+  <a href="{% url gbook_manage_profile %}">{% trans "Manage profile" %}</a> 
+  <a href="{% url gbook_change_password %}">{% trans "Change password" %}</a>   
+  <a href="{% url gbook_log_out %}">{% trans "Exit" %}</a>    
+  {% if user.is_superuser %}
+  <span style="font-family: Arial Bold; font-size:12px;margin-left:14px;margin-right:14px;">|</span>
+  <a href="{% url gbook_admin_answers_from_unregistered %}" style="color:red;">
+  {% trans "Messages from unregistered users" %}
+  </a>
+  {% if new_messages_from_unregistered.count > 0 %}(<b>{{ new_messages_from_unregistered.count }}</b>){% endif %}
+   <a href="{% url gbook_admin_manage_users %}" style="color:green;margin-left:7px;">
+  {% trans "User list" %}
+   </a>
+  {% endif %} 
+</div> 

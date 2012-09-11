@@ -1,0 +1,83 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n %}
+{% load bbcode_for_gbook %}
+{% load pagination_tags %}
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>
+            </td>   
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </tfoot> 
+    {% if answers %}               
+    <tbody>
+        <tr>
+          <td valign="top" id="main-content">  
+          {% autopaginate answers 40 %}  
+          {% for answer in answers %}
+          <div class="answer-from-unregistred"> 
+                <div style="background-color:#f7f7f7">           
+                    <span style="color:#333;">
+                    {{ answer.unregistered_user }} 
+                    </span>
+                    {% if answer.unregistered_user_email %}
+                    <span style="color:brown">({{ answer.unregistered_user_email }})</span>
+                    {% endif %}
+                    <span style="color:#555">
+                     {% trans "write" %} {{ answer.unregistered_message_send_time }} 
+                    </span>
+                </div> 
+                <div style="background-color:#fff;font-weight:normal;">
+                     {{ answer.unregistered_user_send_message|bbcode }}
+                </div> 
+                <div style="background-color:#e5e5e6">               
+                     {% if answer.unregistered_message_to_theme == 'new_theme' %}
+                      <b style="color:red">{% trans "New theme!" %}</b>
+                      {% else %}
+                      {% trans "answer to theme" %} <a href="{% url gbook_view_theme theme=answer.unregistered_message_to_theme %}">№<b>{{ answer.unregistered_message_to_theme}}</b></a>
+                     {% endif %}                                            
+                     [<a href="?publish={{ answer.id }}">{% trans "Publish" %}</a>] 
+                     [<a href="?delete={{ answer.id }}">{% trans "Delete" %}</a>]                 
+                     {% if answer.unregistered_user_need_registration == 'yes' %}           	
+                	   [<a href="?publish={{ answer.id }}&confirm_reg=yes" style="color:green">
+                     {% trans "Confirm registration and publish" %}
+                     </a>]
+                  	 {% endif %}                
+                </div>              
+          </div>    
+          {% endfor %}              
+          </td>             
+        </tr>
+    </tbody>  
+    {% else %} 
+    <tbody>
+        <tr>
+            <td valign="top" id="main-content"> 
+            <div class="answer-from-unregistred"  style="background-color:#fff;font-size:16px;padding:20px;"> 
+            {% trans "No new messages" %}.
+            </div>
+            </td>
+        </tr>
+    </tbody>
+    {% endif %}      
+</table>
+
+
+{% paginate %}
+
+
+{% endblock %}

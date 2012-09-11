@@ -1,0 +1,12 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n %}
+<div class="auth_user">
+<a href="{% url gbook_view %}"/><img src="{{ MEDIA_URL }}/gbook/img/logotip.png" id="logotip" style="border:0px"></a> 
+<br /><br />
+<font style="color:brown;font-family:Arial">{% trans '404 Page not found' %}.</font> <a href="{% url gbook_view %}">{% trans 'Back to guestbook' %}</a>
+</div>
+
+
+{% endblock %}

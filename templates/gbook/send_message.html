@@ -1,0 +1,113 @@
+{% extends 'gbook/base.html' %}
+
+{% block js %}
+
+<script type="text/javascript">
+$(function() {
+    $("#{{ form.message_text.auto_id }}").focus();
+});
+</script>
+
+<script type="text/javascript"> 
+    var  id ='{{ form.message_text.auto_id }}'; 
+        function bbcode(Tag) {
+                var Open='['+Tag+']';
+                var Close='[/'+Tag+']';
+                var object = document.getElementById(id);
+                object.focus();
+                if (window.attachEvent && navigator.userAgent.indexOf('Opera') === -1) {                                        
+                        var s = object.sel;
+                        if(s){                                  
+                                var l = s.text.length;
+                                s.text = Open + s.text + Close;
+                                s.moveEnd("character", -Close.length);
+                                s.moveStart("character", -l);                                           
+                                s.select();                
+                        }
+                }   else {                                              
+                        var ss = object.scrollTop;
+                        sel1 = object.value.substr(0, object.selectionStart);
+                        sel2 = object.value.substr(object.selectionEnd);
+                        sel = object.value.substr(object.selectionStart, object.selectionEnd - object.selectionStart);                                              
+                        object.value = sel1 + Open + sel + Close + sel2;
+                        object.selectionStart = sel1.length + Open.length;
+                        object.selectionEnd = object.selectionStart + sel.length;
+                        object.scrollTop = ss;                                             
+                }
+                return false;
+        }
+        function smile(Tag) {
+                var Open='['+Tag+']';
+                var object = document.getElementById(id);
+                object.focus();
+                if (window.attachEvent && navigator.userAgent.indexOf('Opera') === -1) {                                        
+                        var s = object.sel;
+                        if(s){                                  
+                                var l = s.text.length;
+                                s.text = Open + s.text;
+                                s.moveEnd("character", -Close.length);
+                                s.moveStart("character", -l);                                           
+                                s.select();                
+                        }
+                }   else {                                              
+                        var ss = object.scrollTop;
+                        sel1 = object.value.substr(0, object.selectionStart);
+                        sel2 = object.value.substr(object.selectionEnd);
+                        sel = object.value.substr(object.selectionStart, object.selectionEnd - object.selectionStart);                                              
+                        object.value = sel1 + Open + sel + sel2;
+                        object.selectionStart = sel1.length + Open.length;
+                        object.selectionEnd = object.selectionStart + sel.length;
+                        object.scrollTop = ss;                                             
+                }
+                return false;
+        }         
+</script>
+{% endblock %}
+
+{% block content %}
+{% load i18n %}
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "Send message to" %} <a href="{% url gbook_view_profile view_profile=message_to_profile %}">{{ message_to_profile }}</a>
+            </td>            
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>           
+        </tr>
+    </tfoot>                
+    <tbody>       
+       <tr>
+          <td id="main-content">  
+                <form action="" method="post" class="jqtransform" enctype="multipart/form-data">             
+                {% csrf_token %}
+                {{ form.message_text }} 
+                {% block form_error_text %} 
+                {% autoescape off %} 
+                  {{ form.message_text.errors }}      
+                {% endautoescape %} 
+                {% endblock %} 
+                <br>     
+                <input type="submit" id="submit" value="{% trans "Submit" %}"> 
+                <br><br>         
+            </form> 
+                
+            <div class="bbcodes">                
+                {% include "gbook/_bbcodes_chat.html" %}                      
+            </div>
+            
+          </td>
+       </tr>
+    </tbody>    
+</table>
+            
+{% endblock %}
+

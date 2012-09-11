@@ -1,0 +1,663 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-11 10:27+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: _bbcodes.html:3
+msgid "This text"
+msgstr "Такой текст"
+
+#: _bbcodes.html:4 _bbcodes_chat.html:3
+msgid "Link"
+msgstr "Ссылка"
+
+#: _bbcodes.html:5
+msgid "Picture link"
+msgstr "Адрес картинки"
+
+#: _bbcodes.html:6 _bbcodes.html.py:7 _bbcodes.html.py:8 _bbcodes_chat.html:4
+#: _bbcodes_chat.html.py:5 _bbcodes_chat.html.py:6
+msgid "This colour"
+msgstr "Такой цвет"
+
+#: _bbcodes.html:9 _bbcodes_chat.html:7
+msgid "Bold"
+msgstr "Жирный"
+
+#: _bbcodes.html:10 _bbcodes_chat.html:8
+msgid "Italic"
+msgstr "Курсив"
+
+#: _bbcodes.html:11 _bbcodes_chat.html:9
+msgid "Underline"
+msgstr "Подчеркнутый"
+
+#: _bbcodes.html:12 _bbcodes_chat.html:10
+msgid "Stroke"
+msgstr "Зачеркнутый"
+
+#: _bbcodes.html:13 _bbcodes.html.py:14
+msgid "Header"
+msgstr "Заголовок"
+
+#: _bbcodes.html:15
+msgid "Hidden text"
+msgstr "Скрытый текст"
+
+#: _bbcodes.html:16
+msgid "Quote"
+msgstr "Цитата"
+
+#: _bbcodes.html:17
+msgid "Video from youtube.com"
+msgstr "Видео с youtube.com"
+
+#: _bbcodes.html:18
+msgid ""
+"The given text is private. It means that it sees only the registered users."
+msgstr ""
+"Данный текст является приватным. Это значит что его видят только "
+"зарегистрированные пользователи."
+
+#: _bbcodes.html:18
+msgid "Private text"
+msgstr "Приватный текст"
+
+#: _menu.html:5
+msgid "You login as"
+msgstr "Вы зашли как"
+
+#: _menu.html:7
+msgid "Guestbook"
+msgstr "Гостевая"
+
+#: _menu.html:8
+msgid "Personal messages"
+msgstr "Личные сообщения"
+
+#: _menu.html:12 admin_manage_profile.html:92 admin_manage_profile.html.py:156
+#: gbook.html:183 manage_profile.html:105 view_profile.html:92
+msgid "Karma"
+msgstr "Карма"
+
+#: _menu.html:14 admin_manage_profile.html:14 admin_manage_users.html:89
+#: manage_profile.html:13 view_profile.html:117
+msgid "Manage profile"
+msgstr "Управление профайлом"
+
+#: _menu.html:15 change_password.html:17
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: _menu.html:16
+msgid "Exit"
+msgstr "Выход"
+
+#: _menu.html:20
+msgid "Messages from unregistered users"
+msgstr "Сообщения от незарегистрированных пользователей"
+
+#: _menu.html:24
+msgid "User list"
+msgstr "Список пользователей"
+
+#: _search.html:5
+msgid "Show search"
+msgstr "Показать поиск"
+
+#: _search.html:8
+msgid "Hide search"
+msgstr "Скрыть поиск"
+
+#: _search.html:42
+msgid "Search string"
+msgstr "Cтрока поиска"
+
+#: _search.html:47 _sections.html:5
+msgid "Choose section"
+msgstr "Выберите раздел"
+
+#: _search.html:74
+msgid "Show results"
+msgstr "Показать результаты"
+
+#: _sections.html:10
+msgid "Show answers to themes"
+msgstr "Показывать ответы к темам"
+
+#: admin_answers_from_unregistered.html:41
+msgid "write"
+msgstr "написал"
+
+#: admin_answers_from_unregistered.html:49
+msgid "New theme!"
+msgstr "Новая тема!"
+
+#: admin_answers_from_unregistered.html:51
+msgid "answer to theme"
+msgstr "в ответ на тему"
+
+#: admin_answers_from_unregistered.html:53
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: admin_answers_from_unregistered.html:54 gbook.html:118 gbook.html.py:257
+#: gbook.html.py:265 gbook_themes_only.html:124
+msgid "Delete"
+msgstr "Удалить"
+
+#: admin_answers_from_unregistered.html:57
+msgid "Confirm registration and publish"
+msgstr "Подтвердить регистрацию и опубликовать"
+
+#: admin_answers_from_unregistered.html:71
+msgid "No new messages"
+msgstr "Нет новых сообщений"
+
+#: admin_manage_profile.html:18 manage_profile.html:15
+msgid "Current settings"
+msgstr "Текущие настройки"
+
+#: admin_manage_profile.html:38 admin_manage_profile.html.py:131
+#: manage_profile.html:34 manage_profile.html.py:83 view_profile.html:69
+msgid "Avatar"
+msgstr "Аватар"
+
+#: admin_manage_profile.html:47 admin_manage_profile.html.py:140
+#: admin_manage_users.html:48 gbook.html:177 manage_profile.html:43
+#: manage_profile.html.py:89 view_profile.html:76
+msgid "Sex"
+msgstr "Пол"
+
+#: admin_manage_profile.html:51 admin_manage_profile.html.py:143
+#: admin_manage_users.html:55 gbook.html:166 manage_profile.html:47
+#: manage_profile.html.py:92 view_profile.html:79
+msgid "City"
+msgstr "Город"
+
+#: admin_manage_profile.html:61 admin_manage_profile.html.py:146
+#: admin_manage_users.html:62 gbook.html:171 manage_profile.html:57
+#: manage_profile.html.py:95 view_profile.html:82
+msgid "About"
+msgstr "О себе"
+
+#: admin_manage_profile.html:71 admin_manage_profile.html.py:152
+#: manage_profile.html:101 view_profile.html:88
+msgid "Personal status"
+msgstr "Персональный статус"
+
+#: admin_manage_profile.html:81 admin_manage_profile.html.py:160
+#: gbook.html:189 manage_profile.html:111 view_profile.html:95
+msgid "Karma points"
+msgstr "Очки кармы"
+
+#: admin_manage_profile.html:102 change_karma.html:107 change_password.html:65
+#: gbook_edit_answer.html:115 gbook_edit_theme.html:117 gbook_submit.html:123
+#: gbook_submit_answer.html:118 gbook_submit_answer_unregistered.html:162
+#: gbook_submit_unregistered.html:164 manage_profile.html:67
+#: registration_form.html:65 send_message.html:99 show_chat.html:157
+msgid "Submit"
+msgstr "Отправить"
+
+#: admin_manage_profile.html:107 gbook.html:22 gbook_themes_only.html:25
+#: manage_profile.html:72 view_profile.html:36
+msgid "User"
+msgstr "Пользователь"
+
+#: admin_manage_profile.html:118
+msgid "Banned by users till"
+msgstr "Забанен участниками до"
+
+#: admin_manage_profile.html:120 admin_manage_profile.html.py:125
+#: admin_manage_users.html:75 admin_manage_users.html.py:80
+#: view_profile.html:57 view_profile.html.py:62
+msgid "Current time"
+msgstr "Текущее время"
+
+#: admin_manage_profile.html:123 admin_manage_users.html:79 gbook.html:216
+msgid "Banned by administrator to"
+msgstr "Забанен администратором до"
+
+#: admin_manage_profile.html:149 manage_profile.html:98 view_profile.html:85
+msgid "Total messages"
+msgstr "Всего сообщений"
+
+#: admin_manage_profile.html:154 manage_profile.html:103 view_profile.html:90
+msgid "set by administrator"
+msgstr "Присваивается администратором"
+
+#: admin_manage_profile.html:157
+msgid "The karma influences a rank of the user"
+msgstr "Карма влияет на звание пользователя"
+
+#: admin_manage_profile.html:158
+msgid "If user karma falls to -10, he would be banned!"
+msgstr "Если карма пользователя упадет до отметки -10, он будет забанен!"
+
+#: admin_manage_profile.html:164 manage_profile.html:114 view_profile.html:98
+msgid "How many karma points you can give to other users"
+msgstr "Сколько очков кармы вы можете отдать другим пользователям"
+
+#: admin_manage_profile.html:165
+msgid "Each three days you receive three points of karma"
+msgstr "Каждые три дня вы получаете три очка"
+
+#: admin_manage_profile.html:166 manage_profile.html:116
+msgid "Next date adding three points of a karma"
+msgstr "Cледующая дата получения трех очков кармы"
+
+#: admin_manage_profile.html:168 manage_profile.html:118 view_profile.html:102
+msgid "Now"
+msgstr "Сейчас"
+
+#: admin_manage_users.html:38
+msgid "Administrator"
+msgstr "Администратор"
+
+#: admin_manage_users.html:74 gbook.html:207 view_profile.html:52
+msgid "Banned by users to"
+msgstr "Забанен участниками до"
+
+#: admin_manage_users.html:81 view_profile.html:120
+msgid "Remove ban"
+msgstr "Cнять бан!"
+
+#: admin_manage_users.html:85
+msgid "Ban user"
+msgstr "Бан на 3 дня"
+
+#: admin_manage_users.html:90 view_profile.html:125
+msgid "Delete profile"
+msgstr "Удалить профайл"
+
+#: base.html:6
+msgid "by Sobolev Andrey"
+msgstr "разработал Соболев Андрей"
+
+#: base.html:24
+msgid "OpenSource project."
+msgstr "OpenSource проект"
+
+#: base.html:25
+msgid "All rights reserved."
+msgstr "Все права защищены"
+
+#: change_karma.html:80
+msgid "Change karma for"
+msgstr "Изменение кармы для"
+
+#: change_karma.html:117
+msgid "You cannot change a karma to yourself"
+msgstr "Вы не можете изменить карму себе"
+
+#: change_password.html:35
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: change_password.html:48
+msgid "New password"
+msgstr "Новый пароль"
+
+#: change_password.html:56
+msgid "Repeat new password"
+msgstr "Повторите новый пароль"
+
+#: gbook.html:23 gbook_themes_only.html:26 registration_form.html:40
+msgid "Password"
+msgstr "Пароль"
+
+#: gbook.html:30 gbook_themes_only.html:33 registration_form.html:32
+msgid "Login"
+msgstr "Логин"
+
+#: gbook.html:38 gbook_themes_only.html:42
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: gbook.html:39 gbook_submit_answer_unregistered.html:138
+#: gbook_submit_unregistered.html:140 registration_form.html:14
+msgid "Registration"
+msgstr "Регистрация"
+
+#: gbook.html:39
+msgid "is very simple and don't take much of your time"
+msgstr "очень простая и не отнимет у вас много времени"
+
+#: gbook.html:40 gbook_themes_only.html:44
+msgid ""
+"Also you can write to a forum without registration, your messages will be "
+"published by administration after check"
+msgstr ""
+"Также вы можете писать в форум без регистрации, ваши сообщения будут "
+"опубликованы администрацией после проверки"
+
+#: gbook.html:42
+msgid "Welcome. Administrator closed registration through email"
+msgstr ""
+"Добро пожаловать. Администратор форума запретил регистрацию через email"
+
+#: gbook.html:42 gbook_themes_only.html:46
+msgid "You can write to a forum without registration"
+msgstr "Вы можете писать в форум без регистрации"
+
+#: gbook.html:43 gbook_themes_only.html:47
+msgid ""
+"Your messages will be published by administration after check. Your login "
+"account will be active after administration approval"
+msgstr ""
+"Ваши сообщения будут опубликованы администрацией после проверки. Ваша "
+"учетная запись будет активна после одобрения администрации"
+
+#: gbook.html:64 gbook_edit_answer.html:84 gbook_edit_theme.html:81
+#: gbook_submit.html:84 gbook_submit_answer.html:84
+#: gbook_submit_answer_unregistered.html:78 gbook_submit_unregistered.html:79
+#: gbook_themes_only.html:68
+msgid "Online users and guests"
+msgstr "Активные пользователи и гости"
+
+#: gbook.html:71 gbook_themes_only.html:75
+msgid ""
+"Attention. Messages from unregistered users are shown only after their check "
+"by the manager"
+msgstr ""
+"Внимание. Сообщения от незарегистрированных участников показываются только "
+"после их проверки администратором"
+
+#: gbook.html:78 gbook.html.py:81 gbook_submit.html:92
+#: gbook_themes_only.html:80 gbook_themes_only.html.py:83
+msgid "New theme"
+msgstr "Новая тема"
+
+#: gbook.html:99 gbook_themes_only.html:101
+msgid "Theme"
+msgstr "Тема"
+
+#: gbook.html:101 gbook_submit_unregistered.html:120
+#: gbook_themes_only.html:103
+msgid "Section"
+msgstr "Раздел"
+
+#: gbook.html:105 gbook_themes_only.html:107
+msgid "Private theme"
+msgstr "Приватная тема"
+
+#: gbook.html:117 gbook.html.py:124 gbook.html.py:256 gbook.html.py:264
+#: gbook_themes_only.html:123 gbook_themes_only.html.py:130
+msgid "Edit"
+msgstr "Правка"
+
+#: gbook.html:125 gbook_themes_only.html:131
+msgid "Up theme"
+msgstr "Поднять тему"
+
+#: gbook.html:128 gbook_themes_only.html:134
+msgid "Make public (watch all users)"
+msgstr "Cделать публичной (видят все пользователи)"
+
+#: gbook.html:130 gbook_themes_only.html:136
+msgid "Make private (watch only registered users)"
+msgstr "Cделать приватной (видят только зарегестрированные)"
+
+#: gbook.html:133 gbook_themes_only.html:139
+msgid "Delete theme"
+msgstr "Удалить тему"
+
+#: gbook.html:156 gbook_themes_only.html:162
+msgid "Banned!"
+msgstr "Забанен!"
+
+#: gbook.html:210
+msgid "You can help this user to leave from ban by increasing his karma to 1"
+msgstr ""
+"Вы можете помочь данному пользователю выйти из бана досрочно, подняв его "
+"карму до 1."
+
+#: gbook.html:276 gbook.html.py:278
+msgid "reply"
+msgstr "ответить"
+
+#: gbook_edit_answer.html:91
+msgid "Edit message"
+msgstr "Правка"
+
+#: gbook_edit_theme.html:89
+msgid "Edit theme"
+msgstr "Редактирование темы"
+
+#: gbook_submit_answer.html:91 gbook_submit_answer_unregistered.html:85
+msgid "Answer to theme"
+msgstr "Написать ответ к теме"
+
+#: gbook_submit_answer_unregistered.html:89 gbook_submit_unregistered.html:87
+msgid "Message before publication will be checked by administrator"
+msgstr "Сообщение перед публикацией будет проверено администратором"
+
+#: gbook_submit_answer_unregistered.html:107
+#: gbook_submit_unregistered.html:104
+msgid "Name"
+msgstr "Имя"
+
+#: gbook_submit_answer_unregistered.html:115
+#: gbook_submit_unregistered.html:112
+msgid "Message"
+msgstr "Сообщение"
+
+#: gbook_submit_answer_unregistered.html:123
+#: gbook_submit_unregistered.html:125 registration_form.html:56
+msgid "Captcha"
+msgstr "Капча"
+
+#: gbook_submit_answer_unregistered.html:139
+#: gbook_submit_unregistered.html:141
+msgid "after administrator approve"
+msgstr "после одобрения администратором"
+
+#: gbook_submit_answer_unregistered.html:151
+#: gbook_submit_unregistered.html:153
+msgid "if you need registration"
+msgstr "если нужна регистрация"
+
+#: gbook_submit_unregistered.html:86
+msgid "Create new theme"
+msgstr "Создать новую тему"
+
+#: gbook_themes_only.html:42
+msgid "Register"
+msgstr "Регистрируйтесь"
+
+#: gbook_themes_only.html:42
+msgid "or enter"
+msgstr "или входите"
+
+#: gbook_themes_only.html:43
+msgid "Registration is very simple and don't take much of Your time"
+msgstr "Регистрация очень простая и не отнимет у Вас много времени"
+
+#: gbook_themes_only.html:46
+msgid "Welcome. Administrator closed registration via email"
+msgstr ""
+"Добро пожаловать. Администратор форума запретил регистрацию через email"
+
+#: gbook_themes_only.html:117
+msgid "View theme"
+msgstr "Просмотр темы"
+
+#: index.html:31
+msgid "release"
+msgstr "релиз"
+
+#: index.html:34
+msgid "Added internationalisation, languages"
+msgstr "Добавлена интернационализация"
+
+#: index.html:35
+msgid "Added advanced search bar"
+msgstr "Переработан поиск"
+
+#: index.html:43
+#, fuzzy
+msgid "Download current version DjangoGuestbook 1.1"
+msgstr "Скачать текущую версию DjangoGuestbook 1.2"
+
+#: index.html:45
+msgid "Example"
+msgstr "Пример работы"
+
+#: index.html:45
+msgid "here"
+msgstr "здесь"
+
+#: index.html:49
+msgid "Contact"
+msgstr "Конакт"
+
+#: index.html:51
+msgid "Donate"
+msgstr "Помощь проекту"
+
+#: index.html:57
+msgid "The first decision with similar functions on Django"
+msgstr "Первое решение с подобным функционалом на Django"
+
+#: index.html:58
+msgid ""
+"Possibility of registration of users through email and the administrative "
+"panel"
+msgstr "Первое решение с подобным функционалом для свободного использования"
+
+#: index.html:59
+msgid "Flexible system of ranks"
+msgstr "Гибкая система званий"
+
+#: index.html:60
+msgid "The thought over ban system"
+msgstr "Продуманная система банов"
+
+#: index.html:61
+msgid "Reliability and simplicity of use, stable code"
+msgstr "Надежность и простота использования, стабильный код"
+
+#: index.html:62
+msgid "Chat between users"
+msgstr "Чат между пользователями"
+
+#: index.html:63
+msgid "Possibility of viewing of a theme separately. An example"
+msgstr "Возможность просмотра темы отдельно. Пример"
+
+#: manage_profile.html:107
+msgid "The karma influences your rank"
+msgstr "Карма влияет на ваше звание"
+
+#: manage_profile.html:108
+msgid "If your karma fall under -10 mark you will be banned for three days!"
+msgstr ""
+"Если ваша карма опуститься до отметки -10 вы будете забанены на три дня!"
+
+#: manage_profile.html:109
+msgid "Your karma after an exit from ban will be one point"
+msgstr "Ваша карма после выхода из бана будет равна единице"
+
+#: manage_profile.html:115 view_profile.html:99
+msgid "Each three days you receive three points"
+msgstr "Каждые три дня вы получаете три очка"
+
+#: my_karma.html:36
+msgid "You have been rated"
+msgstr "Вам поставили оценки"
+
+#: my_karma.html:36 my_karma.html.py:76 private_messages.html:36
+#: private_messages.html.py:77
+msgid "show all"
+msgstr "показать все"
+
+#: my_karma.html:58
+msgid "plus + "
+msgstr "плюс +"
+
+#: my_karma.html:60 my_karma.html.py:100
+msgid "minus -"
+msgstr "минус +"
+
+#: my_karma.html:76
+msgid "You rated"
+msgstr "Вы поставили оценки"
+
+#: my_karma.html:98
+msgid "plus +"
+msgstr "плюс +"
+
+#: private_messages.html:36
+msgid "Incoming"
+msgstr "Входящие"
+
+#: private_messages.html:55
+msgid "New!"
+msgstr "Новое"
+
+#: private_messages.html:77
+msgid "Outcoming"
+msgstr "Исходящие"
+
+#: send_message.html:77
+msgid "Send message to"
+msgstr "Отправка сообщения для"
+
+#: show_chat.html:111
+msgid "Chat with"
+msgstr "Переписка с"
+
+#: show_chat.html:114
+msgid "renew chat"
+msgstr "Обновить переписку"
+
+#: view_profile.html:21
+msgid "View profile"
+msgstr "Просмотр профайла"
+
+#: view_profile.html:54
+msgid ""
+"You can help this user to leave from ban ahead of schedule if you up his "
+"karma to 1 point"
+msgstr ""
+"Вы можете помочь данному пользователю выйти из бана досрочно, подняв его "
+"карму до 1"
+
+#: view_profile.html:60
+msgid "Banned by administrator till"
+msgstr "Забанен администратором до"
+
+#: view_profile.html:100
+msgid "Next date of reception of three points of a karma"
+msgstr "Cледующая дата получения трех очков кармы"
+
+#: view_profile.html:107
+msgid "Write private message"
+msgstr "Написать личное сообщение"
+
+#: view_profile.html:109
+msgid "Remove karma"
+msgstr "оценить отрицательно"
+
+#: view_profile.html:112
+msgid "Add karma"
+msgstr "оценить положительно"
+
+#: view_profile.html:122
+msgid "Ban for 3 days"
+msgstr "Бан на 3 дня"

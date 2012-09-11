@@ -1,0 +1,102 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n %}
+{% load bbcode_for_gbook %}
+{% load pagination_tags %}
+
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+{% autopaginate gbook_profiles 40 %}
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>
+            </td>   
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </tfoot>                
+    <tbody>
+        <tr>
+          <td valign="top" id="main-content">    
+          {% for profile in gbook_profiles %}
+          <div class="manage-users" style="display:block;margin-bottom:10px;"> 
+                <div style="background-color:#f7f7f7;">           
+                    <span style="color:#555;font-size:16px;">
+                    {{ profile.user.username }}
+                    {% if profile.user.is_superuser == 1 %}
+                    </span>
+                    <span style="color:red">{% trans "Administrator" %}</span>
+                    {% endif %}
+                    <br /> 
+                    <span style="color:#555;font-size:12px;">
+                    {{ profile.user.email }} 
+                    </span>                                      
+                    </span>
+                    <br /><br />
+                    <span style="font-size:10px;">                    
+                      {% if profile.gender %}
+                      {% trans "Sex" %}:
+                      <span style="color:green">
+                      {{ profile.gender }}
+                      </span><br />
+                      {% endif %} 
+                                          
+                      {% if profile.city %}
+                      {% trans "City" %}:
+                      <span style="color:green">
+                      {{ profile.city }}
+                      </span><br />
+                      {% endif %} 
+                                         
+                      {% if profile.about %}
+                      {% trans "About" %}:
+                      <span style="color:green">
+                      {{ profile.about }}
+                      </span><br />
+                      {% endif %}                   
+                    </span> 
+                    <br />                 
+                </div> 
+                <div style="background-color:#fff;">
+                      {% if profile.banned_to > datetime_now %} 
+                                 
+                        {% if profile.banned_by == 'Users' %}
+                        <h3 style="font-size:11px;color:red;clear:both">{% trans "Banned by users to" %} {{ profile.banned_to }}! </h3> 
+                         <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small> <br />            
+                        {% endif %}
+                        
+                        {% if profile.banned_by == 'Administrator' %}
+                        <h3 style="font-size:11px;color:red;clear:both">{% trans "Banned by administrator to" %} {{ profile.banned_to }}! </h3>
+                         <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small> <br /> 
+                         <a href="{% url gbook_admin_remove_ban to_profile=profile.user.username %}" style="color:brown;margin-right:20px;font-size:11px;">{% trans "Remove ban" %}</a> 
+                        {% endif %}            
+                      <br> 
+                      {% else %}                         
+                         <a href="{% url gbook_admin_add_ban to_profile=profile.user.username %}" style="color:brown;margin-right:20px;font-size:11px;">{% trans "Ban user" %}</a> 
+                      {% endif %} 
+                </div> 
+                <div style="background-color:#e5e5e6;">            
+                     <a href="{% url gbook_admin_manage_profile manage_profile=profile.user.username %}" style="color:blue;margin-right:20px;font-size:11px;">{% trans "Manage profile" %}</a>                             
+                     <a href="{% url gbook_admin_delete_profile delete_profile=profile.user.username %}" style="color:red;margin-right:20px;font-size:11px;">{% trans "Delete profile" %}</a>                
+                </div>              
+           </div>    
+           {% endfor %}              
+         </td>             
+      </tr>
+    </tbody>    
+</table>
+
+
+{% paginate %}
+
+{% endblock %}

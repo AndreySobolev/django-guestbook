@@ -1,0 +1,176 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n %}
+{% load show_status %}
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "Manage profile" %} 
+            <a href="{% url gbook_view_profile view_profile=manage_profile.user.username %}">{{ manage_profile.user.username }}</a>
+            </td> 
+            <td class="current-profile">
+                {% trans "Current settings" %} 
+                {{ user_profile.user }}
+            </td>              
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td> 
+            <td class="current-profile">
+            </td>             
+        </tr>
+    </tfoot>                
+    <tbody>
+        <tr>
+          <td valign="top" id="main-content">                            
+          <form action="" method="post" class="jqtransform" enctype="multipart/form-data">             
+          {% csrf_token %}
+            <table> 
+              <tr>
+                <th><label for="id_avatar">{% trans "Avatar" %}:</label></th>
+                <td>   
+                   {{ form.avatar }} 
+                   {% autoescape off %}
+                   {{ form.avatar.errors }}
+                   {% endautoescape %}
+                </td>
+              </tr>
+              <tr>
+                <th><label for="id_gender">{% trans "Sex" %}:</label></th>
+                <td>{{ form.gender }}</td>
+              </tr>
+              <tr>
+                <th><label for="id_city">{% trans "City" %}:</label></th>
+                <td>
+                {{ form.city }} 
+                {% autoescape off %} 
+                {{ form.city.errors }} 
+                {% endautoescape %} 
+                </td>
+              </tr>
+              <tr>
+                <th>
+                <label for="id_about">{% trans "About" %}:</label></th>
+                <td>
+                {{ form.about }}
+                {% autoescape off %} 
+                {{ form.personal_status.errors }} 
+                {% endautoescape %} 
+                </td>
+             </tr> 
+             <tr>
+                <th>
+                <label for="id_carma">{% trans "Personal status" %}:</label></th>
+                <td>
+                {{ form.personal_status }}
+                {% autoescape off %} 
+                {{ form.personal_status.errors }} 
+                {% endautoescape %}                
+                </td>
+             </tr> 
+             <tr>
+                <th>
+                <label for="id_carma">{% trans "Karma points" %}:</label></th>
+                <td>
+                {{ form.karma_points }}
+                {% autoescape off %} 
+                {{ form.karma_points.errors }} 
+                {% endautoescape %}
+                </td>
+              </tr>                           
+             <tr>                                         
+             <tr>
+                <th>
+                <label for="id_carma">{% trans "Karma" %}:</label></th>
+                <td>
+                {{ form.karma }}
+                {% autoescape off %} 
+                {{ form.karma.errors }} 
+                {% endautoescape %} 
+                </td>
+             </tr> 
+            </table> 
+            <br>         
+            <input type="submit" id="submit" value="{% trans "Submit" %}">          
+          </form>
+
+          </td>   
+          <td valign="top" class="current-profile" >
+            <span class="profile-labels">{% trans "User" %}:</span><span class="profile-list-user">
+            <div style="auto; min-height:150px;height:auto;padding:8px;background:#efefef;margin:0px;display:block">
+            <h2>{{ manage_profile.user.username }}</h2><br><br>
+             {% block show_status %} 
+             {% autoescape off %}                          
+                {{ manage_profile.karma|show_status }}
+             {% endautoescape %} 
+             {% endblock %} 
+             
+            {% if user_profile.banned > datetime_now %}            
+              {% if manage_profile.banned_by == 'Users' %}
+              <h3 style="color:red;clear:both">{% trans "Banned by users till" %} {{ manage_profile.banned }}! </h3> 
+                <br>
+               <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small>             
+              {% endif %}
+              {% if manage_profile.banned_by == 'Administrator' %}
+              <h3 style="color:red;clear:both">{% trans "Banned by administrator to" %} {{ manage_profile.banned }}! </h3>
+               <br>
+               <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small>  
+              {% endif %} 
+             {% endif %}                
+            </div>  
+            </span>
+            <br /> 
+            <span class="profile-labels">{% trans "Avatar" %}:</span>              
+            
+            <span class="profile-list">            
+            {% if manage_profile.avatar %}
+                <img src="{{ MEDIA_URL }}/gbook/avatar/{{ manage_profile.avatar }}" width="180"> <br> 
+            {% endif %}            
+            </span>
+            
+            <br /> 
+            <span class="profile-labels">{% trans "Sex" %}:</span>
+            <span class="profile-list">{{ manage_profile.gender|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "City" %}:</span>
+            <span class="profile-list">{{ manage_profile.city|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "About" %}:</span>
+            <span class="profile-list">{{ manage_profile.about|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "Total messages" %}:</span>
+            <span class="profile-list">{{ post_count|default:"" }}</span>
+            <br />
+            <span class="profile-labels">{% trans "Personal status" %}:</span>
+            <span class="profile-list">{{ manage_profile.personal_status|default:"" }}</span>
+            <span class="note">{% trans "set by administrator" %}</span>
+            <br />                
+            <span class="profile-labels">{% trans "Karma" %}:</span><span class="profile-list">{{ manage_profile.karma }}</span>             
+            <span class="note">{% trans "The karma influences a rank of the user" %}.
+            {% trans "If user karma falls to -10, he would be banned!" %}</span>             
+            <br /> 
+            <span class="profile-labels">{% trans "Karma points" %}: </span>
+            <span class="profile-list">{{ manage_profile.karma_points }} 
+            </span> 
+            <span class="note">
+              {% trans "How many karma points you can give to other users" %}.
+              {% trans "Each three days you receive three points of karma" %}.<br /><br />           
+              {% trans "Next date adding three points of a karma" %}: 
+              <span style="color:red">{{ next_datetime_add_karma }}</span><br />
+              <span style="color:green">{% trans "Now" %} {{ datetime_now }} </span>
+            </span>                   
+          </td>  
+      </tr>
+    </tbody>    
+</table>
+
+
+{% endblock %}

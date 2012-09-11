@@ -1,0 +1,308 @@
+Setup CentOS5.
+
+Let's assume that at us is only bought VPS/VDS with pure СentOS5 and access with 
+the rights root.
+Allocated ip 91.218.231.36 address
+
+We incorporate to our shell 
+(I recommend Putty for performance of console commands) and we will start.
+
+1) We update system
+$  yum upgrade # We update system in whole (about ~15 minutes)
+
+2) We establish additional repositories 
+$  wget http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm 
+$  wget http://rpms.famillecollet.com/enterprise/remi-release-5.rpm
+rpm -Uvh remi-release-5*.rpm epel-release-5*.rpm
+/bin/rm epel-release-5-4.noarch.rpm remi-release-5.rpm 
+
+3) Server Nginx installation 
+$  yum install nginx # install nginx  
+$  service nginx start # start nginx
+$  chkconfig nginx on # add to autostart  
+In the browser type 91.218.231.36, we see a greeting nginx 
+
+4) Setup ftp access
+For work with FTP I urgently recommend program WinSCP http://winscp.net
+At first we will establish FTP the server vsftpd (Very Secure FTP daemon)
+$  yum install vsftpd # setup vsftpd 
+$  chkconfig vsftpd on # add to autostart 
+$  service vsftpd start # start 
+
+We add the user for work with FTP.
+In our case it will be "tim" not to change value of variables django STATIC_ROOT, TEMPLATE_DIRS etc.
+$  useradd tim # add user tim
+$  passwd tim # make password
+
+5) Setup MySQL
+$  yum install mysql 
+$  yum install mysql-server 
+$  yum install mysql-devel # setup MySQL Development Tools, for MySQL-python
+
+We find a file/etc/my.cnf and it is replaced its contents 
+
+# /etc/my.cnf 
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+default-storage-engine=InnoDB
+init_connect='SET collation_connection = utf8_general_ci' 
+init_connect='SET NAMES utf8' 
+default-character-set=utf8 
+character-set-server = utf8 
+collation-server = utf8_general_ci
+symbolic-links=0
+
+[mysqldump]
+default-character-set=utf8 
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+# конец содержимое файла /etc/my.cnf
+
+$  service mysqld start # start MySQL server
+$  chkconfig mysqld on # add to autostart
+$  /usr/bin/mysqladmin -u root password 'Password'  # setting up password for root 
+
+Then we pass to creation of a necessary database and the user:
+$  mysql -u root -p
+mysql> CREATE DATABASE djbook;
+mysql> USE  djbook;
+mysql> GRANT ALL PRIVILEGES ON *.* TO user@"%"  IDENTIFIED BY '123456' WITH GRANT OPTION;
+mysql> GRANT ALL PRIVILEGES ON *.* TO user@"localhost"  IDENTIFIED BY '123456' WITH GRANT OPTION; # коннект для пользователя user разрешен из любого места.
+mysql> FLUSH PRIVILEGES;
+mysql> \q
+
+Now you can connect with MySQL base "djbook" on 91.218.231.36:3306 address
+with the account "user" and the password "123456".
+For work with MySQL bases i recommend MySQL Front http://www.mysqlfront.de/wp/
+
+6) Setup Python
+$  yum upgrade python 
+$  yum install python-devel
+$  yum install python-setuptools
+$  yum install gcc
+$  yum install python-imaging
+
+Install PIL
+$  yum install zlib zlib-devel
+$  yum install libjpeg libjpeg-devel
+$  yum install freetype freetype-devel
+$  yum install libpng libpng-devel
+$  wget http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+$  tar xvfz Imaging-1.1.7.tar.gz
+$  cd Imaging-1.1.7
+$  python setup.py build_ext -i
+$  python setup.py install
+
+Install Django
+$  easy_install django==1.3
+
+Install MySQL-Python
+$  easy_install MySQL-python (only after - yum install mysql-devel)
+
+Install Captcha
+$  easy_install django-simple-captcha
+
+Install Pagination
+&  easy_install django-pagination
+
+8) We copy our project to the address
+91.218.231.36/home/tim/djbook/
+Create a folder  91.218.231.36/home/tim/.python-eggs/
+on folders /home/tim/djbook/media/ и 91.218.231.36/home/tim/.python-eggs/ we put the rights 777 
+(Set group, owner and permissions recursively)
+As do not forget to expose "Owner" for the user "tim" if copy files with the account "root".
+ 
+$ cd /home/tim/djbook # pass in a folder with the project
+
+Check file settings.py 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'djbook',                      # Or path to database file if using sqlite3.
+        'USER': 'user',                        # Not used with sqlite3.
+        'PASSWORD': '123456',                  # Not used with sqlite3.
+        'HOST': '',                            # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                            # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+$  python manage.py syncdb #  synchronise bases
+
+On it it is possible to we finished server setup.
+
+
+
+# Project start in a development mode #
+
+
+#/etc/nginx/nginx.conf
+
+######### begin nginx.conf #########
+
+user              root;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log;
+#error_log  /var/log/nginx/error.log  notice;
+#error_log  /var/log/nginx/error.log  info;
+
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+    
+    #
+    # The default server
+    #
+    server {
+        listen       80;
+        server_name  _;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        #location / {
+         #   root   /usr/share/nginx/html;
+          #  index  index.html index.htm;
+
+        #}
+
+        location / {
+            #proxy_pass http://127.0.0.1:81/; # apache
+            proxy_pass http://127.0.0.1:8005/; # django dev
+            alias /home/tim/djbook;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location /static_admin {
+            alias /usr/lib/python2.4/site-packages/django/contrib/admin/media;
+            #autoindex on;
+            access_log off;
+        }
+
+
+        location /static {
+            alias /home/tim/djbook/static;
+            #autoindex on;
+            access_log off;
+        }
+
+
+        location /media {
+            alias /home/tim/djbook/media;
+            #autoindex on;
+            access_log off;
+        }        
+
+        error_page  404              /404.html;
+        location = /404.html {
+            root   /usr/share/nginx/html;
+        }
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+
+    # Load config files from the /etc/nginx/conf.d directory
+    include /etc/nginx/conf.d/*.conf; #
+
+}
+
+# end nginx.conf #
+
+&  service nginx restart # restart nginx 
+
+Next
+$   cd /home/tim/djbook
+$   python manage.py runserver 8005
+
+On 91.218.231.36/djbook wee see our project.
+
+
+# Project start in a working mode (and switching between modes)
+
+Stop Nginx
+$   service nginx stop
+
+Install Apache server 
+$   yum install httpd
+Install mod_wsgi
+$   yum install mod_wsgi # 
+In folder /usr/lib/httpd/modules appear file mod_wsgi.so,
+Edit /etc/httpd/conf/httpd.conf,
+add next string
+LoadModule wsgi_module modules/mod_wsgi.so
+
+At the end of httpd.conf add next strings
+Listen 81
+
+WSGIScriptAlias / /home/tim/djbook/django.wsgi
+
+<Directory /home/tim/djbook>
+	Order allow,deny
+	Allow from all
+</Directory> 
+
+<Directory /home/tim/.python-eggs >
+	Order allow,deny
+	Allow from all
+</Directory>
+
+Next 
+$   cd /home
+$   chmod 755 tim
+$   cd /home/tim/djbook
+$   python manage.py syncdb
+We stop Django Development server (CTRL + C), which listen port 88.
+
+
+$   service httpd start # now Apache listen port 81 (working mode)
+$   service nginx start
+
+81 port - Apache.
+8005 port - django dev (python manage.py runserver 8005 из корневой директории проекта)
+
+For switching mode edit nginx.conf 
+
+django dev:
+#proxy_pass http://127.0.0.1:81/; # apache
+proxy_pass http://127.0.0.1:8005/; # django dev
+$   service nginx restart
+
+боевой:
+proxy_pass http://127.0.0.1:81/; # apache
+#proxy_pass http://127.0.0.1:8005/; # django dev
+$   service nginx restart
+

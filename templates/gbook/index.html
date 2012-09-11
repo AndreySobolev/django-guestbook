@@ -1,0 +1,94 @@
+{% extends 'gbook/base.html' %}
+
+{% block css %}
+<link type="text/css" href="{{ MEDIA_URL }}/gbook/css/jquery.snippet.css" rel="stylesheet" media="all" />
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery.snippet.js"></script>
+
+<script type="text/javascript" id="sourcecode">
+$(document).ready(function(){
+$("pre.js").snippet("perl",{style:"zellner",showNum:true});
+});
+</script>
+
+{% endblock %}
+
+{% block content %}
+{% load i18n %}
+
+<table class="etc-table" style="margin:15px;">
+    <thead>
+        <tr>
+            <td style="padding:10px;">
+            <a href="{% url gbook_view %}" style="border:0px;"><img src="{{ MEDIA_URL }}/gbook/img/logotip.png" border="0"></a>
+            
+            <br /><br />
+            
+            <div class="answer-from-unregistred" style="padding:12px;font-size:12px;width:800px; margin-bottom:5px;background:#dde3ee;">
+            <h2 style="font-family:Arial";><span style="color:green">22.08.2012</span> {% trans "release" %} <span style="color:red">Django Guestbook 1.2</span></h2>
+
+            <ul style="list-style:square;list-style-position:inside;color:#444;font-weight:normal;margin-top:15px;">            
+             <li> {% trans "Added internationalisation, languages" %} <b style="color:red">En</b> (by default), <b>Ru</b>.   
+             <li> {% trans "Added advanced search bar" %}         
+            </ul>
+            
+            <br>
+             <a href="http://vk.com/django_guestbook" target="_blank">Django guestbook group at vk.com</a> 
+            </div> 
+                                    
+            <div style="clear:both;margin-top:17px;font-size:14px;">                                
+              <a href="http://narod.ru/disk/60039484001.0ae1317cedac2911a18c93b58b02f1ab/djbook.rar.html" target="_blank">{% trans "Download current version DjangoGuestbook 1.2" %}</a>
+              <br /> <br />
+              {% trans "Example" %}: <a href="/gbook/">{% trans "here" %}</a><br>             
+            </div>
+
+            <div style="font-size:14px;margin-bottom:10px">
+                 {% trans "Contact" %} <font color="red">mail.asobolev@yandex.ru</font> 
+                 <br>
+                 {% trans "Donate" %}:
+                 <font color="red">Yandex money</font>: <font color="green">41001611947159</font><br />
+                <font color="red">Webmoney</font>: <font color="green">Z142006741237</font>  
+                </div> 
+            </div>
+            
+            <div style="padding:12px;font-size:12px; width:800px;margin:10px;">
+            <ul style="list-style: square;list-style-position:inside;color:#444;">
+               <li> {% trans "The first decision with similar functions on Django" %}
+               <li> {% trans "Possibility of registration of users through email and the administrative panel" %}
+               <li> {% trans "Flexible system of ranks" %}
+               <li> {% trans "The thought over ban system" %}
+               <li> {% trans "Reliability and simplicity of use, stable code" %}
+               <li> {% trans "Chat between users" %}
+               <li> {% trans "Possibility of viewing of a theme separately. An example" %} <a href="http://django-guestbook.ru/gbook/view-theme/5/">http://django-guestbook.ru/gbook/view-theme/5/</a>
+            </ul>           
+            </div>  
+            </td>            
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td style="padding:25px;">
+            <small>
+            2012. <a href="mailto:mail.asobolev@yandex.ru">by Sobolev Andrey.</a>
+            </small>
+            </td>             
+        </tr>
+    </tfoot>                
+    <tbody>
+    <tr>
+      <td id="main-content" style="padding:25px;">       
+      <pre class="js"" style="white-space: pre-wrap;">
+      {% if request.LANGUAGE_CODE == 'ru' %}
+          {% include "gbook/_setup_ru.html" %} 
+      {% else %}
+          {% include "gbook/_setup_en.html" %}
+      {% endif %}
+      </pre>
+      </td>
+    </tr> 
+</table>    
+    
+{% endblock %}

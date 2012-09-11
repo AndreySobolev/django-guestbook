@@ -1,0 +1,134 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n %}
+{% load show_status %}
+
+{% if user.is_authenticated %}
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+{% else %} 
+<div class="auth_user">
+    <a href="{% url gbook_view %}"/><img src="{{ MEDIA_URL }}/gbook/img/logotip.png" id="logotip" style="border:0px"></a> 
+    <br>
+</div>
+{% endif %}
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "View profile" %} 
+            </td>            
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>           
+        </tr>
+    </tfoot>                
+    <tbody>       
+        <tr>
+          <td valign="top" id="main-content">                 
+                                          
+            <div style="width:494px;">
+                <span class="profile-labels">{% trans "User" %}:</span>
+                
+                <div style="auto; min-height:150px;height:auto;padding:8px;background:#efefef;margin:0px;display:block">
+                <h2>{{ view_profile.user }}</h2>
+                <br /><br />
+                
+                {% if view_profile.karma != None and view_profile.banned_by == None %}
+                    {% block show_status %} 
+                    {% autoescape off %}                          
+                        {{ view_profile.karma|show_status }}
+                    {% endautoescape %} 
+                    {% endblock %} 
+                {% endif %}
+                  
+                {% if view_profile.banned %}            
+                    {% if view_profile.banned_by == 'Users' %}
+                    <h3 style="color:red;clear:both">{% trans "Banned by users to" %} {{ view_profile.banned_to }}! </h3> 
+                        {% if user.is_authenticated %}                       
+                          {% trans "You can help this user to leave from ban ahead of schedule if you up his karma to 1 point" %}
+                        {% endif %}
+                      <br />
+                     <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small>             
+                    {% endif %}
+                    {% if view_profile.banned_by == 'Administrator' %}
+                    <h3 style="color:red;clear:both">{% trans "Banned by administrator till" %} {{ view_profile.banned_to }}! </h3>
+                     <br>
+                     <small style="color:green">{% trans "Current time" %}: {{ datetime_now }}</small>  
+                    {% endif %}            
+                <br /> 
+                {% endif %}        
+            </div> 
+             
+            <br /> 
+            <span class="profile-labels">{% trans "Avatar" %}:</span>              
+            <span class="profile-list">
+            {% if view_profile.avatar %}
+            <img src="{{ MEDIA_URL }}/gbook/avatar/{{ view_profile.avatar }}"> <br> 
+            {% endif %}
+            </span>
+            <br /> 
+            <span class="profile-labels">{% trans "Sex" %}:</span>
+            <span class="profile-list">{{ view_profile.gender|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "City" %}:</span>
+            <span class="profile-list">{{ view_profile.city|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "About" %}:</span>
+            <span class="profile-list">{{ view_profile.about|default:"" }}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "Total messages" %}:</span>
+            <span class="profile-list">{{ post_count|default:"" }}</span>
+            <br />
+            <span class="profile-labels">{% trans "Personal status" %}:</span>
+            <span class="profile-list">{{ view_profile.personal_status|default:"" }}</span>
+            <span class="note">{% trans "set by administrator" %}</span>
+            <br /> 
+            <span class="profile-labels">{% trans "Karma" %}: </span>
+            <span class="profile-list">{{ view_profile.karma }}</span>              
+            <br /> 
+            <span class="profile-labels">{% trans "Karma points" %}: </span>
+            <span class="profile-list">{{ view_profile.karma_points }} </span> 
+            <span class="note">
+              {% trans "How many karma points you can give to other users" %}.
+              {% trans "Each three days you receive three points" %}.<br><br>           
+              {% trans "Next date of reception of three points of a karma" %}: 
+              <span style="color:red">{{ manage_profile }} {{ next_datetime_add_karma }}</span><br>
+              <span style="color:green">{% trans "Now" %} {{ datetime_now }} </span>
+            </span>
+            </div>     
+            {% if view_profile.user != user and user.is_authenticated %}
+                {% if not view_profile.banned %}
+                    <a href="{% url gbook_send_message message_to_profile=view_profile.user %}">{% trans "Write private message" %}</a>
+                    <br />               
+                    <a href="{% url gbook_change_karma karma_delta='remove-karma' to_profile=view_profile.user %}">{% trans "Remove karma" %}</a> 
+                {% endif %}
+                <br />
+                <a href="{% url gbook_change_karma karma_delta='add-karma' to_profile=view_profile.user %}">{% trans "Add karma" %}</a>                  
+            {% endif%} 
+                        
+            {% if user.is_superuser %}
+            <br /><br />
+            <a href="{% url gbook_admin_manage_profile manage_profile=view_profile.user %}" style="color:red">{% trans "Manage profile" %}</a>
+            <br />  
+             {% if view_profile.banned_to > datetime_now %}
+                <a href="{% url gbook_admin_remove_ban to_profile=view_profile.user %}" style="color:red">{% trans "Remove ban" %}</a>              
+             {% else %}
+                <a href="{% url gbook_admin_add_ban to_profile=view_profile.user %}" style="color:red">{% trans "Ban for 3 days" %}</a>
+             {% endif %}
+            <br />
+            <a href="{% url gbook_admin_delete_profile delete_profile=view_profile.user %}" style="color:red">{% trans "Delete profile" %}</a>
+            {% endif %}            
+          </td>  
+      </tr>
+    </tbody>    
+</table>
+
+{% endblock %}
+
+

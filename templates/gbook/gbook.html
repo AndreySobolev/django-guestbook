@@ -1,0 +1,291 @@
+{% extends 'gbook/base.html' %}
+
+{% block content %}
+{% load i18n bbcode_for_gbook show_status pagination_tags %}
+
+
+<div class="auth_user" style="height:155px">
+
+{% if user.is_authenticated and user.is_active %}
+
+    {% include "gbook/_menu.html" %}
+    
+{% else %}
+
+    <img src="{{ MEDIA_URL }}/gbook/img/logotip.png" onclick="document.location.href='{% url gbook_view %}';" style="cursor:pointer;position:relative;left:-9px;top:-5px;"> 
+    <br>
+       <div style="margin-bottom:15px; margin-right:40px;float:left">
+          <form action="" method="post"> 
+          {% csrf_token %}
+            <table style="display:block;float:left;">
+             <tr>
+                <td valign="top"><label for="id_user">{% trans "User" %}:</label> {{ form.user }} {% autoescape off %}{{ form.user.errors }} {% endautoescape %} </td>
+                <td valign="top"><label for="id_password">{% trans "Password" %}:</label> {{ form.password }} {% autoescape off %}{{ form.password.errors }} {% endautoescape %}</td>
+              </tr>
+              <tr>  
+                <td colspan=2> 
+                {% if auth_error %} 
+                    <div class="errorlist_gbook">{{ auth_error }}</div>  
+                {% endif %}             
+                <input type="submit" id="submit" value="{% trans "Login" %}">  
+                </td>
+              </tr>
+             </table>                                      
+          </form>            
+        </div> 
+        <div style="display:block;">
+        {% if registation_via_email == 'yes' %}
+        {% trans "Welcome" %}.  
+        <a href="{% url gbook_registration %}">{% trans "Registration" %}</a> {% trans "is very simple and don't take much of your time" %}.<br />
+        {% trans "Also you can write to a forum without registration, your messages will be published by administration after check" %}.             
+        {% else %}
+        {% trans "Welcome. Administrator closed registration through email" %} <b>{% trans "You can write to a forum without registration" %}.</b> 
+        {% trans "Your messages will be published by administration after check. Your login account will be active after administration approval" %}.             
+        {% endif %}
+        </div> 
+        <div style="display:block;float:left;clear:both;margin:10px;"></div>  
+        
+{% endif %}
+     
+    {% include "gbook/_sections.html" %}     
+   
+</div>
+
+<div style="display:block;text-align:left;" class="show-online">
+     <span style="font-size:11px;color:#555;margin-right:24px;">
+    Online:
+    {% for online_user in online_users %}
+      {% if online_user.username != 'AnonymousUser' %}
+      <a href="{% url gbook_view_profile view_profile=online_user.username %}"> {{ online_user.username }}</a>
+      {% endif %}
+    {% endfor %}
+    </span>
+    <span style="font-size:11px;color:#555;margin-right:24px;">
+    {% trans "Online users and guests" %}: {{ online_users.count }}
+    </span>
+</div> 
+
+{% include "gbook/_search.html" %}
+
+{% if show_notice_from_ungregistered %}
+    <b>{% trans "Attention. Messages from unregistered users are shown only after their check by the manager" %}.</b>
+    <br /><br />
+{% endif %} 
+
+
+<p>
+{% if user.is_authenticated and user.is_active %}
+<a href="{% url gbook_submit theme='new_theme' %}">{% trans "New theme" %}</a>
+<br><br>
+{% else %}
+<a href="{% url gbook_submit_unregistered theme='new_theme' %}">{% trans "New theme" %}</a>
+<br><br>
+{% endif %}
+
+{% if section_text %} 
+    <div class="section" style="font-size:22px;background-color:#fff" id="section_text">
+    {{ section_text }}       
+    </div> 
+{% endif %}
+
+{% autopaginate themes 10 %}
+
+{% for theme in themes %}
+
+<table class="djbook-table">
+    <thead>
+        <tr>
+            <td colspan=2>
+            {% trans "Theme" %} <a href="{% url gbook_view_theme theme=theme.id %}">№{{ theme.id }} </a>
+            {% if section_text == '' %}
+            <span style="margin-left:14px">{% trans "Section" %}: <a href="{% url gbook_view_section section=theme.section %}">  {{ theme.section }} </a></span>
+            {% endif %}            
+            <span class="datetime">{{ theme.theme_start_datetime }} </span>
+            {% if theme.private == 1 %}
+            <span style="float:left;margin-right:14px;color:green;font-size:16px;">{% trans "Private theme" %}</span>                                
+            {% endif %}            
+            </td>   
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan=2>
+            
+                {% if user.username == theme.theme_start_user and not user.is_superuser %}
+                    {% if time_to_delete_or_edit < theme.theme_start_datetime  %}
+                    <span class="user_do">
+                    <a href="{% url gbook_edit_theme theme=theme.id %}" style="float:left">{% trans "Edit" %}</a>
+                    <a href="{% url gbook_delete_theme theme=theme.id %}" style="float:right">{% trans "Delete" %}</a></span>
+                    {% endif %} 
+                {% endif %} 
+                                                      
+                {% if user.is_superuser %}
+                    <div class="admin_do">
+                    <span style="float:left;margin-right:14px;"><a href="{% url gbook_admin_edit_theme theme=theme.id %}">{% trans "Edit" %}</a></span>
+                    <span style="float:left;margin-right:14px;"><a href="{% url gbook_admin_up_theme theme=theme.id %}">{% trans "Up theme" %}</a></span>
+                    
+                    {% if theme.private == 1 %}
+                        <span style="float:left;margin-right:14px;"><a href="{% url gbook_admin_make_public_theme theme=theme.id %}" style="color:green">{% trans "Make public (watch all users)" %}</a></span>                                
+                    {% else %}
+                        <span style="float:left;margin-right:14px;"><a href="{% url gbook_admin_make_private_theme theme=theme.id %}" style="color:brown">{% trans "Make private (watch only registered users)" %}</a></span>
+                    {% endif %} 
+                       
+                    <span style="float:right"><a href="{% url gbook_admin_delete_theme theme=theme.id %}" >{% trans "Delete theme" %}</a></span>
+                    </div>
+                {% endif %}  
+                              
+            </td>
+        </tr>
+    </tfoot>                
+    <tbody>
+        <tr>
+          <td valign="top">
+            
+            {% if theme.fk_to_profile.user %}                          
+                <a href="{% url gbook_view_profile view_profile=theme.theme_start_user %}">{{ theme.theme_start_user }} </a>
+            {% else %}
+                <span style="text-decoration:underline">{{ theme.theme_start_user }}</span>            
+            {% endif %}
+            
+            <br />
+            <span style="font-size:10px;font-weight:bold;color:#008000;">{{ theme.fk_to_profile.personal_status|default_if_none:"" }}</span>
+
+                       
+            {% if theme.fk_to_profile.banned %}
+                <br />
+                <b>{% trans "Banned!" %}</b> 
+            {% endif %}
+            
+            <br /><br /> 
+               
+            {% if theme.fk_to_profile.avatar %}
+                <img src="{{ MEDIA_URL }}/gbook/avatar/{{ theme.fk_to_profile.avatar }}"> <br> 
+            {% endif %}
+            
+            <br />
+            <span style="font-family:Tahoma;font-size:10px;">{% trans "City" %}:</span> 
+            <span style="font-family:Tahoma;font-weight:bold;color:#333;">{{ theme.fk_to_profile.city|default_if_none:"" }}</span>           
+
+                        
+            <br />
+            <span style="font-family:Tahoma;font-size:10px;">{% trans "About" %}:</span>
+            <span style="font-family:Tahoma;font-weight:bold;color:#333;">{{ theme.fk_to_profile.about|default_if_none:"" }}</span>                
+
+            
+            {% if theme.fk_to_profile.gender != None %} 
+                <br />
+                <span style="font-family:Tahoma;font-size:10px;">{% trans "Sex" %}:</span>
+                <span style="font-family:Tahoma;font-weight:bold;color:#333;">{{ theme.fk_to_profile.gender }}</span>
+            {% endif %} 
+            
+            {% if theme.fk_to_profile.karma != None %}
+                <br /><br />
+                <span style="font-family:Tahoma;font-size:10px">{% trans "Karma" %}:</span>
+                <span style="font-family:Tahoma;font-size:10px;font-weight:bold;">{{ theme.fk_to_profile.karma }}</span>
+            {% endif %}
+            
+            {% if theme.fk_to_profile.karma_points != None %}
+                <br />
+                <span style="font-family:Tahoma;font-size:10px">{% trans "Karma points" %}:</span>
+                <span style="font-family:Tahoma;font-size:10px;font-weight:bold;">{{ theme.fk_to_profile.karma_points }}</span>
+            {% endif %}
+            
+            <br /><br />
+            
+            {% if theme.fk_to_profile.karma != None and theme.fk_to_profile.banned_by != 'Users' %}
+                {% block show_status %} 
+                {% autoescape off %}                          
+                    {{ theme.fk_to_profile.karma|show_status }}
+                {% endautoescape %} 
+                {% endblock %} 
+            {% endif %}  
+            
+            <div style="clear:both">
+            {% if theme.fk_to_profile.banned %}            
+                
+                {% if theme.fk_to_profile.banned_by == 'Users' %}        
+                  <span style="font-family:Tahoma;font-size:13px;font-weight:bold;color:red;">{% trans "Banned by users to" %} {{ theme.fk_to_profile.banned_to }}! </span> 
+                      {% if user.is_authenticated %}  
+                          <br />                     
+                          <span style="font-size:10px;font-family:Tahoma;">{% trans "You can help this user to leave from ban by increasing his karma to 1" %}.</span>
+                      {% endif %}           
+                {% endif %}
+                
+                {% if theme.fk_to_profile.banned_by == 'Administrator' %}
+                    <br />
+                    <span style="font-family:Tahoma; font-size:13px; font-weight:bold;color:red;">{% trans "Banned by administrator to" %} {{ theme.fk_to_profile.banned_to }}! </span>
+                {% endif %}    
+                                          
+            {% endif %} 
+            </div>
+                                
+          </td>           
+          <td valign="top">            
+           {{ theme.theme_start_message_text|bbcode:user }}    
+           <br>  
+            {% if theme.themeanswers_set.all %}       
+            <table class="in-djbook-table">  
+              <thead>
+                  <tr>
+                      <td>
+                      </td>   
+                  </tr>
+              </thead>
+              <tfoot>
+                  <tr>
+                      <td>
+                      </td>
+                  </tr>
+              </tfoot>            
+             {% for answer in theme.themeanswers_set.all %}
+              <tr>
+               <td><br><b><small style="color:#555">&raquo;</small></b> 
+                {{ answer.theme_answer_message_text|bbcode:user }}  
+                
+                {% if answer.fk_to_profile.user %}               
+                    <a href="{% url gbook_view_profile view_profile=answer.theme_answer_user %}">{{ answer.theme_answer_user }}</a>
+                {% else %}
+                    <span style="text-decoration:underline">{{ answer.theme_answer_user }}</span>            
+                {% endif %}
+                                  
+                <span class="datetime">{{ answer.theme_answer_datetime }}</span>     
+                  
+                {% if user.username == answer.theme_answer_user and not user.is_superuser %}
+                    {% if time_to_delete_or_edit < answer.theme_answer_datetime  %}
+                        <span class="user_do">
+                        <a href="{% url gbook_edit_answer answer=answer.id %}">{% trans "Edit" %}</a>
+                        <a href="{% url gbook_delete_answer answer=answer.id %}">{% trans "Delete" %}</a>
+                        </span>
+                    {% endif %} 
+                {% endif %} 
+                                
+                {% if user.is_superuser %}
+                    <span class="admin_do">
+                    <a href="{% url gbook_admin_edit_answer answer=answer.id %}">{% trans "Edit" %}</a>
+                    <a href="{% url gbook_admin_delete_answer answer=answer.id %}">{% trans "Delete" %}</a>
+                    </span>
+                {% endif %}
+                             
+               </td>
+              </tr>         
+              {% endfor %}
+            </table> 
+          {% endif %}
+          
+          {% if user.is_authenticated and user.is_active %}
+              <a href="{% url gbook_submit_answer theme=theme.id %}">{% trans "reply" %}</a>
+          {% else %}
+              <a href="{% url gbook_submit_unregistered_answer theme=theme.id %}">{% trans "reply" %}</a>
+          {% endif %}
+          
+          </td>    
+        </tr>
+    </tbody>    
+</table>
+
+{% endfor %}
+
+{% paginate %}
+
+
+{% endblock %}

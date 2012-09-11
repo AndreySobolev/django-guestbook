@@ -1,2 +1,2 @@
-make 03.03.2012 15:24:27 by Sobolev Andrey
-django guestbook 0.9.2 beta release
+make 11.09.2012 10:09:59 by Sobolev Andrey
+django guestbook 1.2 release

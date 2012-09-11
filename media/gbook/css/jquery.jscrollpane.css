@@ -1,0 +1,243 @@
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+ 
+.scroll-pane,
+.scroll-pane-arrows
+{
+	width: 800px;
+	height: 200px;
+	overflow: auto;
+	background:#fff;
+	padding: 0 0px;
+  border-radius: 10px;
+	-moz-border-radius: 10px;
+ 	-webkit-border-radius: 1px;  
+  box-shadow: 0 0 1px rgba(0,0,0,0.5); /* Параметры тени */
+  -moz-box-shadow: 0 0 1px rgba(0,0,0,0.5); /* Для Firefox */
+  -webkit-box-shadow: 0px 0px 0 1px rgba(0,0,0,0.1); /* Для Safari и Chrome */
+}
+
+.scroll-pane-arrows .you-send
+{
+	background: #fff;
+  display:block;
+	float: left;
+	padding: 4px 4px 4px 4px;	
+	width: 792px;
+	-moz-border-radius: 4px;
+ 	-webkit-border-radius: 4px;
+  border-radius: 4px;
+
+}
+
+.scroll-pane-arrows .you-get
+{   
+	background: #f4f7fa;
+  display:block;
+	float: left;
+	padding: 4px 4px 4px 4px;	
+	width: 792px;
+	-moz-border-radius: 4px;
+ 	-webkit-border-radius: 4px;
+  border-radius: 4px;
+
+}
+
+.scroll-pane-arrows .carma_href
+{
+  text-decoration: None;
+	font-size: 10px;
+  font-family: Arial; 
+  color: #777; 	
+}
+
+.scroll-pane-arrows b
+{
+  text-decoration: None;
+	font-size: 10px;
+  font-family: Arial; 
+  color: #777; 	
+}
+
+.scroll-pane-arrows small
+{
+	font-size: 10px;
+  font-family: Arial;  	
+  color: #777; 
+  margin-left: 4px 
+}
+
+.scroll-pane-arrows p
+{
+  display:block;
+	background: #fff;
+	float: left;
+	padding: 4px 4px 4px 4px;	
+	width: 792px;
+	-moz-border-radius: 4px;
+ 	-webkit-border-radius: 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 1px black; 
+  box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -moz-box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.5); 	
+}
+
+
+/*  Не удалять (!!!!) Нужный пример.
+
+.scroll-pane-arrows p:nth-child(odd)
+{
+	background: #fff;
+	float: left;
+	padding: 4px 4px 4px 4px;	
+	width: 792px;
+	-moz-border-radius: 10px;
+ 	-webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 1px black; 
+  box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -moz-box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.5); 	
+}
+
+.scroll-pane-arrows p:nth-child(even)
+{
+	background: #eff6ff;
+	float: left;
+	padding: 4px 4px 4px 4px;		
+	width: 792px;
+	-moz-border-radius: 10px;
+ 	-webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 1px black; 
+  box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -moz-box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.5); 
+} */
+
+.horizontal-only
+{
+	height: auto;
+	max-height: 200px;
+} 
+ 
+
+.jspContainer     
+{
+	overflow: hidden;
+	position: relative;
+}
+
+.jspPane
+{
+	position: absolute;
+}
+            
+.jspVerticalBar
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 16px;
+	height: 100%;
+	background: red;
+}
+
+.jspHorizontalBar
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+	background: red;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.jspCap
+{
+	display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+	float: left;
+}
+
+.jspTrack
+{
+	background: #efefef;
+	position: relative;
+}
+
+.jspDrag
+{
+	background: #bbd; 
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+	float: left;
+	height: 100%;
+}
+
+.jspArrow
+{
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.jspArrow.jspDisabled
+{
+	cursor: default;
+	background: #80808d;
+}
+
+.jspVerticalBar .jspArrow
+{
+	height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+	outline: none;
+}
+
+.jspCorner
+{
+	background: #fafafa;
+	float: left;
+	height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+	margin: 0 -3px 0 0;
+}
+

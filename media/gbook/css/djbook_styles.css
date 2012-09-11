@@ -1,0 +1,886 @@
+* {margin:0;padding:0}  /* убираем автоотступы (которые каждый браузер рассчитывает по своему гыг) */
+img {border:0px}
+
+body 
+{
+  overflow: scroll; font-family:Arial;font-size:12px; /* небольшой хак, фиксируем полосу прокрутки, во избежании "скачков" ширины */
+}
+
+
+
+/* BBCodes */
+.bbcodes
+{
+  float:left;
+  line-height:24px;  
+  font-family:Arial;
+  font-weight:normal;
+  font-size:12px;  
+  width:600px;
+  background: #efefef; 
+  padding:10px;
+  text-shadow: 0 0px 0 #fff;     
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+.bbcodes *
+{
+  cursor:pointer; 
+}
+
+blockquote
+{
+  cursor:pointer;
+  font-family:Arial;
+  background: #f4f6ff;
+  padding:10px;      
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;   
+}
+
+/* авторизация на главной cтранице и верхнее меню */
+
+.auth_user 
+{
+  display:block;
+  height:auto;
+  min-height:105px;
+  font-family:Arial;
+  font-weight:normal;
+  font-size:12px;
+  text-align:left;
+  min-width:980px;
+  width: 1170px;
+  padding:15px;
+  background: #f9f9f9;
+  margin-bottom:15px;
+  border-left: 1px solid #e1e1e1; 
+  border-right: 2px solid #e1e1e1; 
+  border-bottom: 2px solid #e1e1e1;    
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px; 
+}
+
+.auth_user #logotip {cursor:pointer;position:relative;left:-9px;top:-5px;}
+
+.auth_user input{
+	font-size:12px;
+  font-weight:bold;
+	display:block;
+	border:1px solid #ccc;
+	margin:5px 0 5px;
+	padding:3px;
+	font-size:12px;
+	color:#555;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.auth_user label{
+	font-size:10px;
+  font-family:Arial, Helvetica, sans-serif;	
+}
+
+.auth_user .menu {
+  display:block;
+  margin:5px;    
+}
+
+.auth_user .menu a { 
+ /* Можете произвольно оформить ссылки в верхнем меню */  
+}
+
+.auth_user #submit { /* кнопка "Отправить" */
+	background-color:#58B9EB;
+	border:1px solid #40A2D4;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+
+/* cтандартный вывод ошибок при неправильном заполнении полей */
+.errorlist li
+{
+  list-style-type:none;
+}
+
+.errorlist_gbook
+{
+  font-family:Arial;
+  font-size:10px;
+  padding: 4px 4px 4px 4px;
+  font-weight: bold; 
+	display: block;
+  background: #fddbdb;  
+  height:auto;
+  max-width:600px;	 
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+/* регистрация  (def registration в views.py) */
+
+.errorlist_registration
+{
+  font-family:Arial;
+  font-size:10px;
+  padding: 4px 4px 4px 4px;
+  margin:0 4px 0 4px;
+  font-weight: bold; 
+	display: block;
+  background: #fddbdb;  
+  height:auto;
+  width:160px;	 
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+.captcha
+{
+  font-family:Arial;
+  font-weight:bold;
+  font-size:11px;
+  padding: 4px 4px 4px 4px;
+
+
+  font-weight: bold; 
+	display: inline;
+  background: #d6d6d6;  
+ 
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+/* online */
+.show-online {  
+  font: 14px Arial;
+  display:block;
+	padding:1px;
+	text-align:center;
+	background-color:#fff;
+	color:#555;
+  width:1180px;	
+  overflow:hidden;
+  margin-bottom:5px;
+ }  
+ 
+/* поиск */
+.search {
+  font-size:12px;
+  display:block;
+  font-family: sans-serif;
+  letter-spacing: -0,5px;
+  text-shadow: 0 1px 0 #fff;  
+  max-width:1170px;
+	padding:15px;
+  clear:both;
+  text-align:left;  	
+	background-color:#fff;
+	color:#666;
+	margin-bottom:2px;    
+  margin-bottom:14px;
+	border: 1px solid #ececec;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px; 
+  background-image: linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -o-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -moz-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -webkit-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -ms-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);  
+  background-image: -webkit-gradient(
+  	linear,
+  	left bottom,
+  	left top,
+  	color-stop(0.34, rgb(240,240,240)),
+  	color-stop(0.67, rgb(255,255,255))
+  );	
+
+}
+
+.search input, select {
+	border:1px solid #ccc;
+	font-size:12px;
+  padding:2px;
+	color:#555;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.search #submitData{
+	background-color:#58B9EB;
+	border:1px solid #40A2D4;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px;
+	margin-top:5px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+.search #submitData:hover{
+	background-color:#80cdf5;
+	border-color:#52b1e2;
+}
+
+/* оформление разделов */
+.section {
+  display:block;
+  font-family: sans-serif;
+  letter-spacing: -1px;
+  text-shadow: 0 1px 0 #fff;  
+  max-width:1170px;
+	padding:15px;
+  clear:both;
+  text-align:left;  	
+	background-color:#fff;
+	color:#666;
+	margin-bottom:2px;    
+  margin-bottom:14px;
+	border: 1px solid #ececec;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px; 
+  background-image: linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -o-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -moz-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -webkit-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);
+  background-image: -ms-linear-gradient(bottom, rgb(240,240,240) 34%, rgb(255,255,255) 67%);  
+  background-image: -webkit-gradient(
+  	linear,
+  	left bottom,
+  	left top,
+  	color-stop(0.34, rgb(240,240,240)),
+  	color-stop(0.67, rgb(255,255,255))
+  );	
+
+}
+
+/* оформление блока с текстом темы, к которой пишется ответ */
+.theme_text {
+  display:block;
+  font-size:12px;
+  font-family: sans-serif;
+  letter-spacing: -0,4px;
+  text-shadow: 0 1px 0 #fff;  
+  max-width:1170px;
+	padding:15px;
+  clear:both;
+  text-align:left;  	
+	background-color:#fff;
+	color:#666;
+	margin-bottom:2px;    
+  margin-bottom:14px;
+	border: 1px solid #ececec;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px; 
+
+}
+
+
+/* оформление постов (def gbook & view_theme в views.py) */
+
+.djbook-table
+{
+  width: 1200px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-shadow: 0 1px 0 #fff;
+  color: #2a2a2a;
+  margin-bottom:15px;
+}
+
+.djbook-table thead td
+{  
+  background: #efefef;
+  text-align: left;
+  height: 40px;
+  padding: 10px 10px;  
+  font: bold 11px Arial;
+  color: #555;  
+  border-left: 1px solid #d1d1d1; 
+  border-right: 2px solid #d1d1d1; 
+  border-top: 1px solid #d1d1d1;  
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+
+}
+
+.djbook-table thead a
+{
+  font: bold 11px Arial;
+  color: #577;
+  text-shadow: 1px 1px 0px #fff;
+  text-decoration: none;
+}
+
+.djbook-table thead .datetime
+{
+  font: bold 10px Arial;
+  color: #777;
+  text-shadow: 0px 1px 0px #fff;
+  text-decoration: none;
+  float:right;
+  text-align:right;  
+}
+
+.djbook-table tbody td
+{
+  font: normal 12px Verdana, Arial, Helvetica;
+  text-align: left; 
+  padding: 0 20px; 
+  background: #efefef; 
+  border-left: 1px solid #d1d1d1; 
+  border-right: 2px solid #d1d1d1;    
+} 
+ 
+.djbook-table tbody td:first-child
+{
+  width: 200px;
+  text-align: left;
+  background: #efefef; 
+  border-right: 0px solid #d1d1d1;    
+}
+
+.djbook-table tfoot td
+{
+  font: bold 1.4em Georgia;
+  border-bottom: 1px solid #dadada;
+  height: 40px;
+  background: #efefef;
+  text-align: left; 
+  padding: 4px;  
+  overflow:hidden;  
+  border-left: 1px solid #d1d1d1; 
+  border-right: 2px solid #d1d1d1; 
+  border-bottom: 2px solid #d1d1d1;  
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;    
+}
+
+.djbook-table tfoot td .show-answers
+{
+  font: bold 14px Arial;
+  display:block;
+	padding:15px;
+	cursor:pointer;
+	text-align:center;
+	background-color:#eee;
+	color:#555;
+  width:97,5%;
+  overflow:hidden;
+	border: 1px solid #ececec;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;     
+} 
+
+.djbook-table tfoot td .show-answers:hover
+{
+  font: bold 14px Arial;
+  display:block;
+	padding:15px;
+	cursor:pointer;
+	text-align:center;	
+	background-color:#fff;
+	color:#555;
+  width:97,5%;
+  overflow:hidden;
+	border: 1px solid #ececec;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;     
+}
+
+/* оформление ответа к посту */
+
+.in-djbook-table 
+{    
+  width: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left; 
+  margin-top:10px;  
+  text-shadow: 0px 0px 0px #fff;  
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;  
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;  
+}
+
+.in-djbook-table thead td:first-child
+{
+  background: #fff;
+/*  background: rgba(184,243,85,0.3);*/
+  text-align: left;
+  height: 20px;
+  padding: 0 10px;
+  border-left: 1px solid #d1d1d1; 
+  border-right: 1px solid #d1d1d1; 
+  border-top: 1px solid #d1d1d1;      
+} 
+
+.in-djbook-table tbody td:first-child
+{
+  background: #fff;
+  width: 940px;
+  text-align: left;
+  border-left: 1px solid #d1d1d1; 
+  border-right: 1px solid #d1d1d1;   
+}
+
+.in-djbook-table tfoot td:first-child
+{
+  background: #fff;
+  text-align: left;  
+  height: 20px;
+  padding: 0 10px;  
+  border-left: 1px solid #d1d1d1; 
+  border-right: 1px solid #d1d1d1; 
+  border-bottom: 1px solid #d1d1d1;      
+} 
+ 
+
+.in-djbook-table tbody .datetime
+{
+  font: normal 10px Arial;
+  color: #afafaf;
+  text-shadow: 0px 1px 0px #ececec;
+  text-decoration: none;
+} 
+ 
+ 
+/* оформление всех страниц, за исключением постов */
+
+.etc-table
+{
+  width: 1200px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-shadow: 0 1px 0 #fff;
+  color: #2a2a2a;
+  background: #fafafa;
+  margin-bottom:10px;  
+}
+
+.etc-table input{
+	font-size:12px;
+  font-weight:bold;
+	display:block;
+	border:1px solid #ccc;
+	margin:5px 0 5px;
+	padding:3px;
+	font-size:12px;
+	color:#555;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.etc-table  textarea{
+	font-size:12px;
+  font-weight:bold;
+	display:block;
+	border:1px solid #ccc;
+	margin:5px 0 5px;
+	padding:3px;
+	font-size:12px;
+	color:#555;
+	font-family:Arial, Helvetica, sans-serif;
+	width:600px;
+}
+
+.etc-table label{
+	font-size:10px;
+  font-family:Arial, Helvetica, sans-serif;	
+}
+
+.etc-table #submit { /* кнопка "Отправить" */
+	background-color:#58B9EB;
+	border:1px solid #40A2D4;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+.etc-table td
+{
+  height: 50px;
+  padding: 0 10px;
+}
+
+.etc-table thead td
+{
+  border-left: 1px solid #eaeaea; 
+  border-right: 1px solid #eaeaea; 
+  border-top: 1px solid #eaeaea;   
+  text-align: left; 
+  font: bold 16px 'trebuchet MS', 'Lucida Sans', Arial;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px; 
+}
+ 
+.etc-table tbody td#main-content
+{
+  border-left: 1px solid #eaeaea; 
+  border-right: 1px solid #eaeaea;   
+  text-align: left;
+  font: normal 12px Verdana, Arial, Helvetica;  
+  padding: 10px;
+} 
+ 
+.etc-table tbody td
+{
+  min-width:100px;
+  border-left: 0px solid #eaeaea; 
+  border-right: 0px solid #eaeaea;   
+  text-align: left;
+  font: normal 12px Verdana, Arial, Helvetica;  
+} 
+
+.etc-table tbody .profile-labels
+{
+  font-family:Arial;
+  font-size:11px;
+  padding: 4px 10px 4px 10px;
+  font-weight: bold; 
+	display: block;
+	width:auto;	
+  background: #cefa84;  
+  height:auto;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+}
+
+.etc-table tbody .profile-list
+{
+  font-family:Arial;
+  font-size:14px;
+  padding: 4px 10px 4px 10px;
+  font-weight: bold; 
+	display: block;
+	width:auto;
+  background: #cee6fc;  
+  min-height:14px;	 
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+.etc-table tbody .profile-list-user
+{
+  font-family:Arial;
+  font-size:14px;
+  padding: 4px 10px 4px 10px;
+  font-weight: bold; 
+	display: block;
+  background: #efefef;  
+  min-height:14px;	 
+  overflow:auto;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+.etc-table tbody .note
+{
+  font-family:Arial;
+  font-size:11px;
+  padding: 4px 10px 4px 10px;
+  font-weight: bold; 
+	display: block;
+  background: #efefef;  
+  height:auto;
+  margin-bottom:10px;	 
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;  
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px; 
+}
+
+.etc-table tbody td .button-92px-margin-left
+{
+margin-left: 92px;
+}
+
+.etc-table tbody td .button-62px-margin-left
+{
+margin-left: 92px;
+}
+ 
+.etc-table tfoot td
+{
+  border-left: 1px solid #eaeaea; 
+  border-right: 1px solid #eaeaea;  
+  border-bottom: 1px solid #dadada;  
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}  
+ 
+.etc-table .current-profile
+{
+  padding: 0 20px;
+  background: rgba(184,243,85,0.3); 
+  border-left: 1px solid #cdcdcd;    
+  border-right: 1px solid #cdcdcd;   
+}  
+
+/* администратор - оформление ссылок "правка", "удалить"; сообщения от незарегестрированных */
+
+.admin_do 
+{
+  font: normal 11px Arial;
+  margin-bottom:10px; 
+  padding:0px;
+  text-shadow: 0px 1px 0px #ececec;
+}
+
+.admin_do a
+{
+  font: normal 11px Arial;
+  color: red; 
+}
+
+.answer-from-unregistred
+{
+  display:block;
+  font: bold 12px arial;
+  background-color: #c7c9d1;
+  padding: 0px; 
+  border-top: 1px solid #d1d1d1;    
+  border-left: 1px solid #d1d1d1; 
+  border-right: 1px solid #d1d1d1; 
+  border-bottom: 1px solid #d1d1d1;
+  margin-bottom:1px; 
+  clear:both;  
+  text-shadow: 1px 0px 0px #ececec;   
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;  
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;   
+}
+
+.answer-from-unregistred div
+{
+  padding: 10px; 
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;  
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;      
+}
+
+.manage-users
+{
+  display:block;
+  font: bold 12px arial;
+  background-color: #c7c9d1;
+  padding: 0px; 
+  border-top: 1px solid #d1d1d1;    
+  border-left: 1px solid #d1d1d1; 
+  border-right: 1px solid #d1d1d1; 
+  border-bottom: 1px solid #d1d1d1;
+  margin-bottom:1px; 
+  clear:both;  
+  text-shadow: 1px 0px 0px #ececec;   
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;  
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;   
+}
+
+.manage-users div
+{
+  padding: 10px; 
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;  
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;      
+}
+
+/* пользователь - оформление ссылок "правка", "удалить" */
+
+.user_do 
+{
+  font: normal 11px Arial;
+  margin-bottom:10px; 
+  padding:0px;
+  text-shadow: 0px 1px 0px #ececec;
+}
+
+.user_do a
+{
+  font: normal 11px Arial;
+  color: green; 
+}
+
+/* статус пользователя */
+
+#status-pic {float:left; margin-right:10px;} 
+
+.status
+{
+  font: bold 11px Arial ;
+  background: #f4f3f3;
+  padding: 8px; 
+  border-top: 0px solid #fff;    
+  border-left: 0px solid #fff; 
+  border-right: 0px solid #bbb; 
+  border-bottom: 0px solid #bbb; 
+  margin-bottom:10px;
+  float:left;
+  text-shadow: none;  
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-topleft: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;    
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;    
+}
+
+/* всплывающие подсказки */
+.jQtooltip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dotted;
+
+}
+.jQtooltip div {
+  display: none;
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  z-index: 1000;  
+  width: 190px;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000;
+  -webkit-box-shadow: 0 1px 3px #C4C4C4;
+  -moz-box-shadow: 0 1px 3px #C4C4C4;
+  box-shadow: 0 1px 3px #C4C4C4;
+  border: 1px solid #DBB779;
+  background: #FFF6BD;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.mini {
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 11px;
+  padding:3px;
+  line-height: 13px;
+  text-align: center;
+  margin: 2px;
+  color: #9A4D18;
+  border: 1px solid #FAD28F;
+  background: #FFF6BD;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* приватный текст */
+
+.private-anonymous {
+  font-size:12px;
+  color:green;
+  font-weight:bold;
+  letter-spacing: -1px;
+}
+
+.private-registred {
+  font-size:12px;
+  color:green;
+  font-weight:bold;
+  letter-spacing: -1px;
+}
+
+
+

@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>«Django guestbook» {% trans "by Sobolev Andrey" %}</title>
+
+<link href="{{ MEDIA_URL }}/gbook/css/djbook_styles.css" type="text/css" rel="stylesheet">
+{% block css %}
+{% endblock %}
+
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery-1.6.1.min.js"></script>
+{% block js %}
+{% endblock %}
+</head>
+
+<body>
+    <center>  
+        {% block content %}
+        {% endblock %}  
+        <br /><br />
+        <small> <a href="http://django-guestbook.ru" target="_blank">
+        <strong>django guestbook</strong></a>. 
+        {% trans "OpenSource project." %} 
+        {% trans "All rights reserved." %}<br>
+        2011. <a href="mailto:mail.asobolev@yandex.ru">by Sobolev Andrey.</a>  
+        <a href="http://andrey-sobolev.ru" target="_blank">http://andrey-sobolev.ru</a>  
+    </center>
+</body>
+</html>

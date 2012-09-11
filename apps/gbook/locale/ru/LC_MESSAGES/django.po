@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-11 13:16+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: forms.py:14
+msgid "Show"
+msgstr "Показывать"
+
+#: forms.py:15
+msgid "Do not show"
+msgstr "Не показывать"
+
+#: forms.py:19 forms.py:149
+msgid "User"
+msgstr "Пользователь"
+
+#: forms.py:19 forms.py:149
+#, fuzzy
+msgid "Enter login"
+msgstr "Введите логин"
+
+#: forms.py:20 forms.py:150
+msgid "Password"
+msgstr "Пароль"
+
+#: forms.py:20 forms.py:150
+msgid "Enter password"
+msgstr "Введите пароль"
+
+#: forms.py:36 forms.py:45 forms.py:56 forms.py:73
+msgid "Section"
+msgstr "Раздел"
+
+#: forms.py:40
+msgid "Show answers to themes"
+msgstr "Показывать ответы к темам"
+
+#: forms.py:44
+msgid "Search text"
+msgstr "Строка поиска"
+
+#: forms.py:44
+msgid "Specify your search"
+msgstr "Некорректный запрос"
+
+#: forms.py:55 forms.py:72 forms.py:131 forms.py:140
+msgid "Message"
+msgstr "Сообщение"
+
+#: forms.py:55 forms.py:72 forms.py:131
+msgid "Write something"
+msgstr "Напишите что нибудь"
+
+#: forms.py:60
+msgid "The maximum size of the message - 2000 symbols"
+msgstr "Максимальный размер сообщения - 2000 символов"
+
+#: forms.py:66
+msgid "Don't need registration"
+msgstr "Не нужна регистрация"
+
+#: forms.py:67
+msgid "Need registration"
+msgstr "Нужна регистрация"
+
+#: forms.py:71
+msgid "Specify name"
+msgstr "Укажите имя"
+
+#: forms.py:74 forms.py:152
+msgid "Captcha"
+msgstr "Капча"
+
+#: forms.py:74 forms.py:152
+msgid "Enter characters from picture"
+msgstr "Введите цифры с картинки"
+
+#: forms.py:74
+msgid "Error captcha code"
+msgstr "Неправильный код"
+
+#: forms.py:85 forms.py:163
+msgid "That user already exist"
+msgstr "Такой пользователь уже есть"
+
+#: forms.py:90
+msgid "The maximum size of the message - 4000 symbols"
+msgstr "Максимальный размер сообщения - 4000 символов"
+
+#: forms.py:95 forms.py:168
+msgid "No more than 40 characters"
+msgstr "Не более 40 символов"
+
+#: forms.py:102 forms.py:175
+msgid "Such mail box already is"
+msgstr "Такой почтовый ящик уже есть"
+
+#: forms.py:106
+msgid "For registration fill the field \"email \""
+msgstr "Для регистрации заполните поле \"email \""
+
+#: forms.py:118
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: forms.py:118
+msgid "Enter current password"
+msgstr "Укажите текущий пароль"
+
+#: forms.py:119
+msgid "New password"
+msgstr "Новый пароль"
+
+#: forms.py:119
+msgid "Enter new password"
+msgstr "Введите новый пароль"
+
+#: forms.py:120
+msgid "Repeat new password"
+msgstr "Повторите новый пароль"
+
+#: forms.py:135 forms.py:144
+msgid "The maximum size of the message of 1400 characters"
+msgstr "Максимальный размер сообщения - 1400 символов"
+
+#: forms.py:151
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:151
+msgid "Enter correct e-mail"
+msgstr "Введите корректный e-mail"
+
+#: forms.py:151
+msgid "Enter e-mail"
+msgstr "Введите e-mail"
+
+#: forms.py:152
+msgid "Invalid captcha code"
+msgstr "Неверно указан код"
+
+#: forms.py:156
+msgid "No more 30 characters"
+msgstr "Не более 30 символов"
+
+#: models.py:12
+msgid "M"
+msgstr "М"
+
+#: models.py:12
+msgid "Male"
+msgstr "Мужской"
+
+#: models.py:13
+msgid "F"
+msgstr "Ж"
+
+#: models.py:13
+msgid "Female"
+msgstr "Женский"
+
+#: views.py:70 views.py:84
+msgid "No themes in this section"
+msgstr "Нет тем в данном разделе"
+
+#: views.py:111 views.py:446
+msgid "Incorrect login or password"
+msgstr "Неправильно указан логин или пароль"
+
+#: views.py:211 views.py:240
+msgid ""
+"The message is sent and will be published after check by the administrator"
+msgstr ""
+"Ваше сообщение отправлено и будет опубликовано после проверки модератором"
+
+#: views.py:402 views.py:411 views.py:420 views.py:429
+msgid "No result"
+msgstr "Ничего не найдено"
+
+#: views.py:433
+msgid "Invalid request"
+msgstr "Некорректный запрос"
+
+#: views.py:578
+msgid "Current password is invalid"
+msgstr "Текущий пароль введен неверно"
+
+#: views.py:585
+msgid "Your password is successfully changed"
+msgstr "Ваш пароль успешно изменен"
+
+#: views.py:587
+msgid "The entered passwords do not match"
+msgstr "Введенные пароли не совпадают"
+
+#: views.py:806
+msgid "Your karma points have ended"
+msgstr "У вас закончились очки кармы"
+
+#: views.py:828 views.py:1146
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: views.py:830
+msgid "Your password:"
+msgstr "Ваш пароль"
+
+#: views.py:832
+msgid "For authorization use next link:"
+msgstr "Для авторизации используйте следующую ссылку"
+
+#: views.py:843
+msgid "Thank you"
+msgstr "Спасибо"
+
+#: views.py:845
+msgid "To your еmail:"
+msgstr "На ваш почтовый ящик"
+
+#: views.py:847
+msgid "send message with authorization code."
+msgstr "выслано сообщение с кодом авторизации."
+
+#: views.py:877
+msgid "Your account is active"
+msgstr "Ваша учетная запись активирована"
+
+#: views.py:877
+msgid "Back to gbook"
+msgstr "Назад к гостевой книге"
+
+#: views.py:1142
+msgid "Django Guestbook Registration"
+msgstr "Django Guestbook регистрация"
+
+#: views.py:1148
+msgid "For authorization use:"
+msgstr "для авторизации используйте"
+
+#: views.py:1149
+#, fuzzy
+msgid "Login:"
+msgstr "Логин:"
+
+#: views.py:1151
+msgid "Password:"
+msgstr "Пароль:"
+
+#: views.py:1153
+msgid "Guestbook adress: http://"
+msgstr "Адрес гостевой книги: http://"
+
+#: templatetags/bbcode_for_gbook.py:54 templatetags/bbcode_for_gbook.py:57
+msgid "Private text. Only for registered users."
+msgstr ""
+"Данный текст является приватным. Это значит что его видят только "
+"зарегистрированные пользователи."
+
+#: templatetags/bbcode_for_gbook.py:54
+msgid "private text"
+msgstr "приватный текст"
+
+#: templatetags/show_status.py:20
+msgid "одно очко до бана"
+msgstr ""
+
+#: templatetags/show_status.py:23
+msgid "очка до бана"
+msgstr ""
+
+#: templatetags/show_status.py:26
+msgid "очков до бана"
+msgstr ""
+
+#: templatetags/show_status.py:28
+msgid "Новичок"
+msgstr ""
+
+#: templatetags/show_status.py:30
+msgid "Хорошая репутация"
+msgstr ""
+
+#: templatetags/show_status.py:32
+msgid "Прекрасная репутация"
+msgstr ""
+
+#: templatetags/show_status.py:34
+msgid "Легенда"
+msgstr ""
+
+#: templatetags/show_status.py:36
+msgid "Администратор"
+msgstr ""

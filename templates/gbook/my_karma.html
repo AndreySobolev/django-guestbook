@@ -1,0 +1,113 @@
+{% extends 'gbook/base.html' %}
+
+{% block css %}
+<link type="text/css" href="{{ MEDIA_URL }}/gbook/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<link type="text/css" href="{{ MEDIA_URL }}/gbook/css/jquery.jscrollpane.lozenge.css" rel="stylesheet" media="all" />
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" id="sourcecode">
+	$(function()
+	{
+		$('.scroll-pane').jScrollPane();
+		$('.scroll-pane-arrows').jScrollPane(
+			{
+				showArrows: true,
+				horizontalGutter: 10
+			}
+		);
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+{% load i18n %}
+{% load bbcode_for_chat %}
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "You have been rated" %}: <a href="?all=get_karma">({% trans "show all" %})</a>
+            </td>            
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>             
+        </tr>
+    </tfoot>                
+    <tbody>
+    <tr>
+      <td id="main-content">
+    	 	<div id="container">
+    			<div class="scroll-pane-arrows"> 
+          {% block karma_from %} 
+          {% autoescape off %}    				 
+            {% for karma in karma_from_user %} 
+            <p>
+            <a href="{% url gbook_view_profile view_profile=karma.karma_from_user %}" class="karma_href"><b>{{ karma.karma_from_user }}</b></a> 
+            {{ karma.karma_text|bbcode }}
+            {% if karma.karma_delta == 1 %}
+            <span style="background:#28d400;padding:4px"><b style="background:#fff;padding:4px">{% trans "plus + " %}</b></span>
+            {% else %}
+            <span style="background:#d40000;padding:4px"><b style="background:#fff;padding:4px">{% trans "minus -" %} </b></span>
+            {% endif %} 
+            <small>{{ karma.karma_send_time }}</small>          
+            </p>
+            {% endfor %} 	
+          {% endautoescape %} 
+          {% endblock %}        				
+    			</div>
+      	</div>	 
+      </td>
+    </tr> 
+</table>    
+    
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "You rated" %}: <a href="?all=send_karma">({% trans "show all" %})</a>
+            </td>              
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>            
+        </tr>
+    </tfoot>                
+    <tbody>
+     <tr>
+      <td id="with-lines">
+       	<div id="container" >
+    			<div class="scroll-pane-arrows"> 
+          {% block karma_to_user %} 
+          {% autoescape off %}    	            
+            {% for karma in karma_to_user %} 
+            <p>
+            <a href="{% url gbook_view_profile view_profile=karma.karma_to_user %}" class="karma_href"><b>{{ karma.karma_to_user }}</b></a> 
+            {{ karma.karma_text|bbcode }}
+            {% if karma.karma_delta == 1 %}
+            <span style="background:#28d400;padding:4px"><b style="background:#fff;padding:4px">{% trans "plus +" %} </b></span>
+            {% else %}
+            <span style="background:#d40000;padding:4px"><b style="background:#fff;padding:4px">{% trans "minus -" %} </b></span>
+            {% endif %} 
+            <small>{{ karma.karma_send_time }}</small>          
+            </p>  
+            {% endfor %}
+          {% endautoescape %} 
+          {% endblock %}              
+          </div>
+        </div>	   
+      </td>
+    </tr>
+</table> 
+          
+{% endblock %}

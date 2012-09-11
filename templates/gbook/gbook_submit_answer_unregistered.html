@@ -1,0 +1,199 @@
+{% extends 'gbook/base.html' %}
+
+{% block js %}
+
+<script type="text/javascript"> 
+    var  id ='{{ form.unregistered_user_send_message.auto_id }}'; 
+        function bbcode(Tag) {
+                var Open='['+Tag+']';
+                var Close='[/'+Tag+']';
+                var object = document.getElementById(id);
+                object.focus();
+                if (window.attachEvent && navigator.userAgent.indexOf('Opera') === -1) {                                        
+                        var s = object.sel;
+                        if(s){                                  
+                                var l = s.text.length;
+                                s.text = Open + s.text + Close;
+                                s.moveEnd("character", -Close.length);
+                                s.moveStart("character", -l);                                           
+                                s.select();                
+                        }
+                }   else {                                              
+                        var ss = object.scrollTop;
+                        sel1 = object.value.substr(0, object.selectionStart);
+                        sel2 = object.value.substr(object.selectionEnd);
+                        sel = object.value.substr(object.selectionStart, object.selectionEnd - object.selectionStart);                                              
+                        object.value = sel1 + Open + sel + Close + sel2;
+                        object.selectionStart = sel1.length + Open.length;
+                        object.selectionEnd = object.selectionStart + sel.length;
+                        object.scrollTop = ss;                                             
+                }
+                return false;
+        }
+        function smile(Tag) {
+                var Open='['+Tag+']';
+                var object = document.getElementById(id);
+                object.focus();
+                if (window.attachEvent && navigator.userAgent.indexOf('Opera') === -1) {                                        
+                        var s = object.sel;
+                        if(s){                                  
+                                var l = s.text.length;
+                                s.text = Open + s.text;
+                                s.moveEnd("character", -Close.length);
+                                s.moveStart("character", -l);                                           
+                                s.select();                
+                        }
+                }   else {                                              
+                        var ss = object.scrollTop;
+                        sel1 = object.value.substr(0, object.selectionStart);
+                        sel2 = object.value.substr(object.selectionEnd);
+                        sel = object.value.substr(object.selectionStart, object.selectionEnd - object.selectionStart);                                              
+                        object.value = sel1 + Open + sel + sel2;
+                        object.selectionStart = sel1.length + Open.length;
+                        object.selectionEnd = object.selectionStart + sel.length;
+                        object.scrollTop = ss;                                             
+                }
+                return false;
+        }          
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+{% load i18n %}    
+{% load bbcode_for_gbook %}
+
+<div class="auth_user">
+    <a href="/gbook"/><img src="{{ MEDIA_URL }}/gbook/img/logotip.png" id="logotip" style="border:0px"></a>  
+    <br>
+    <span style="font-size:11px;color:#555">
+    Online:
+    {% for online_user in online_users %}
+        {% if online_user.username != 'AnonymousUser' %}
+            <a href="{% url gbook_view_profile view_profile=online_user.username %}"> {{ online_user.username }}</a>
+        {% endif %}
+    {% endfor %}
+    <br>
+    {% trans "Online users and guests" %}: {{ online_users.count }}
+    </span>
+</div>
+
+<table class="etc-table">
+    <thead>
+        <tr>                                              
+          <td style="padding-top:10px">{% trans "Answer to theme" %} <a href="{% url gbook_view_theme theme=to_theme.id %}">№{{ to_theme.id }} </a>          
+          <div class="theme_text">
+          {{ to_theme.theme_start_message_text|bbcode:user }}
+          </div>         
+          <span style="font-size:12px;">{% trans "Message before publication will be checked by administrator" %}</span>
+          <br><br>
+          </td>        
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+          <td>         
+          </td>         
+        </tr>
+    </tfoot>                
+    <tbody>
+    <tr>
+      <td id="main-content">  
+          <form action="" method="post" class="jqtransform" enctype="multipart/form-data">             
+          {% csrf_token %}
+            <table style="width:1000px;"> 
+              <tr>
+                <td valign="top"><label for="id_unregistered_user">{% trans "Name" %}:</label></td>
+                <td valign="top">{{ form.unregistered_user }}           
+                    {% autoescape off %} 
+                    {{ form.unregistered_user.errors }} 
+                    {% endautoescape %}  
+                </td>
+              </tr>          
+              <tr>
+                <td valign="top"><label for="id_unregistered_text">{% trans "Message" %}:</label></td>
+                <td valign="top">{{ form.unregistered_user_send_message }}
+                    {% autoescape off %} 
+                    {{ form.unregistered_user_send_message.errors }} 
+                    {% endautoescape %}   
+                </td>
+              </tr>                              
+              <tr>
+                <td valign="top"><label for="id_captcha_1">{% trans "Captcha" %}:</label></td>
+                <td valign="top">
+                <div style="width:300px;">
+                  {{ form.captcha }}
+                </div>
+                <div style="margin-top:15px;">
+                    {% autoescape off %} 
+                    {{ form.captcha.errors }} 
+                    {% endautoescape %}
+                </div>    
+                </td>
+              </tr>                               
+              <tr>
+                <td valign="top">
+                  <label for="id_unregistered_need_registration">
+                  {% trans "Registration" %}<br />
+                  ({% trans "after administrator approve" %}):
+                  </label></td>
+                <td valign="top">{{ form.unregistered_user_need_registration }}
+                    {% autoescape off %} 
+                    {{ form.non_field_errors }}
+                    {% endautoescape %}                  
+                </td>
+              </tr> 
+              <tr class="registration" style="display:none">
+                <td valign="top">
+                    <label for="id_unregistered_user_email">
+                    Email <br />
+                    ({% trans "if you need registration" %}):
+                    </label>
+                </td>
+                <td valign="top">{{ form.unregistered_user_email }}
+                    {% autoescape off %} 
+                    {{ form.unregistered_user_email.errors }} 
+                    {% endautoescape %}                   
+                </td>
+              </tr>                                         
+            </table> 
+            <br>        
+            <input type="submit" id="submit" value="{% trans "Submit" %}"> 
+            <br><br>         
+          </form>               
+          <div class="bbcodes">                
+              {% include "gbook/_bbcodes.html" %}                      
+          </div>
+     </td>
+   </tr> 
+   </tbody> 
+     
+    <script>
+        $(document).ready(function () {   
+              $("#id_unregistered_user_need_registration").ready(function() {
+              var need_reg = $("#id_unregistered_user_need_registration").val();
+              if (need_reg == 'yes') {
+                  $(".registration").show()
+                }
+              else {
+                 $(".registration").hide()
+              }   
+            })
+               
+              $("#id_unregistered_user_need_registration").change(function() {
+              var need_reg = $("#id_unregistered_user_need_registration").val();
+              if (need_reg == 'yes') {
+                  $(".registration").show()
+                }
+              else {
+                 $(".registration").hide()
+              }   
+            })
+         
+            });
+    </script>   
+     
+</table>   
+            
+{% endblock %}

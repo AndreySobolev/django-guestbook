@@ -1,0 +1,49 @@
+{% load i18n %}
+
+    <br />
+    <span style="font-size:11px;color:#555;margin-right:24px;">
+    {% trans "Choose section" %}:
+    {{ sections.section }}  
+     </span> 
+
+    <span style="font-size:11px;color:#555;margin-right:24px;">
+    {% trans "Show answers to themes" %}:
+    {{ show_answers.show_answers }}
+     </span>      
+    <script>
+        $(document).ready(function () {
+ 
+        {% if section == '' %}
+            $("#{{ sections.section.auto_id }}").prepend( $('<option value="all" selected>*</option>'));
+            {% else %}
+            $("#{{ sections.section.auto_id }}").prepend( $('<option value="all">*</option>'));
+            {% endif %}
+        });
+        
+        $(function(){
+          $('#{{ sections.section.auto_id }}').bind('change', function () {          
+              var section = $(this).val()
+  
+              if (section == 'all') { 
+                  window.location = '{% url gbook_view %}'; 
+              } 
+              else {
+              var generic_url = '{% url gbook_view_section section='SECTION' %}'
+              generic_url = generic_url.replace('SECTION', section);
+              var url = generic_url
+                 if (url) { 
+                    window.location = url; 
+                  }             
+              }
+              return false;
+          })         
+        });
+        
+        $(function(){
+          $('#id_show_answers').bind('change', function () {          
+              var show_answers = $(this).val()
+              window.location.href = '?show_answers=' + show_answers
+          }) 
+                            
+        });        
+    </script>   

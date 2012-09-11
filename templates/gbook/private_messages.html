@@ -1,0 +1,111 @@
+{% extends 'gbook/base.html' %}
+
+{% block css %}
+<link type="text/css" href="{{ MEDIA_URL }}/gbook/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<link type="text/css" href="{{ MEDIA_URL }}/gbook/css/jquery.jscrollpane.lozenge.css" rel="stylesheet" media="all" />
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}/gbook/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" id="sourcecode">
+	$(function()
+	{
+		$('.scroll-pane').jScrollPane();
+		$('.scroll-pane-arrows').jScrollPane(
+			{
+				showArrows: true,
+				horizontalGutter: 10
+			}
+		);
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+{% load i18n %}
+{% load bbcode_for_chat %}
+
+<div class="auth_user">
+{% include "gbook/_menu.html" %}
+</div>
+
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "Incoming" %} <a href="?all=get_message">({% trans "show all" %})</a>
+            </td>            
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>             
+        </tr>
+    </tfoot>                
+    <tbody>   
+    <tr>
+      <td id="main-content">
+         <div id="container">
+           	<div class="scroll-pane-arrows">  
+            {% for message in messages_from %}
+           	 <a href="{% url gbook_show_chat with_profile=message.message_from_user %}" style="text-decoration:none;!important;color:#333">
+               <p> 
+               {% if message.message_status == 'unread' %}           	
+                  <b style="color:red">{% trans "New!" %}</b>
+               {% endif %}                
+               <b>{{ message.message_from_user }}</b>
+               {% block message_from_user %} 
+               {% autoescape off %}   
+               {{ message.message_text|bbcode }}
+               {% endautoescape %} 
+               {% endblock %}
+              <small>{{ message.message_send_time }}</small>
+              </p> 
+            </a>
+            {% endfor %} 
+            </div>            
+         </div> 
+      </td>
+    </tr>    
+</table>    
+ 
+     
+<table class="etc-table">
+    <thead>
+        <tr>
+            <td>{% trans "Outcoming" %} <a href="?all=send_message">({% trans "show all" %})</a>
+            </td>              
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>
+            </td>            
+        </tr>
+    </tfoot>                
+    <tbody>
+    <tr>
+      <td id="main-content">
+         <div id="container">
+           	<div class="scroll-pane-arrows">  
+            {% for message in messages_to %}
+           	 <a href="{% url gbook_show_chat with_profile=message.message_to_user %}" style="text-decoration:none;!important;color:#333">
+               <p>  
+               <b>{{ message.message_to_user }}</b>
+               {% block message_to_user %} 
+               {% autoescape off %}   
+               {{ message.message_text|bbcode }}
+               {% endautoescape %} 
+               {% endblock %}
+              <small>{{ message.message_send_time }}</small>
+              </p> 
+            </a>
+            {% endfor %} 
+            </div>
+         </div>       
+      </td>
+    </tr>
+</table> 
+
+{% endblock %}
