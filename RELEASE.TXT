@@ -1,2 +1,2 @@
-make 11.09.2012 10:09:59 by Sobolev Andrey
+make 11.10.2012 15:04:34 by Sobolev Andrey
 django guestbook 1.2.1 release
