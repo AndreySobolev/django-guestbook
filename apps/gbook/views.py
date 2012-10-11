@@ -49,10 +49,10 @@ def gbook_view(request, section = '', theme = '',**kwargs):
     time_to_delete_or_edit = datetime_now - time_to_delete_or_edit
     
     # if unregistered adding new theme or answer  
-    if 'show_notice_from_ungregistered' in request.GET: 
-        show_notice_from_ungregistered = True
+    if 'show_notice_to_ungregistered' in request.GET: 
+        show_notice_to_ungregistered = True
     else:
-        show_notice_from_ungregistered = False        
+        show_notice_to_ungregistered = False        
      
     if user.is_superuser == True: 
         new_messages_from_unregistered = AnswersFromUnregistered.objects.all()  
@@ -225,7 +225,7 @@ def gbook_submit_unregistered(request, theme):
                           unregistered_user_need_registration = send_data['unregistered_user_need_registration'],
                           unregistered_user_email = send_data['unregistered_user_email'],
                           unregistered_message_send_time = datetime_now).save()                         
-                return HttpResponseRedirect('%s?show_notice_from_ungregistered=yes' % (reverse('gbook_view')))  
+                return HttpResponseRedirect('%s?show_notice_to_ungregistered=yes' % (reverse('gbook_view')))  
             else:
                 raise Http404  
     else:          
@@ -259,7 +259,7 @@ def gbook_submit_unregistered_answer(request, theme):
                       unregistered_user_need_registration = send_data['unregistered_user_need_registration'],
                       unregistered_user_email = send_data['unregistered_user_email'],                      
                       unregistered_message_send_time = datetime_now).save()
-            return HttpResponseRedirect('%s?show_notice_from_ungregistered=yes' % (reverse('gbook_view')))
+            return HttpResponseRedirect('%s?show_notice_to_ungregistered=yes' % (reverse('gbook_view')))
     else:          
         form = GbookSubmitFormUnregistered()   
     return render_to_response('gbook/gbook_submit_answer_unregistered.html', locals(),context_instance=RequestContext(request))      
@@ -547,12 +547,13 @@ def gbook_view_profile(request, view_profile):
     if user.is_superuser == True: 
         new_messages_from_unregistered = AnswersFromUnregistered.objects.all()
     
+    post_count = Theme.objects.filter(theme_start_user = view_profile).count() + ThemeAnswers.objects.filter(theme_answer_user = view_profile).count()
+
     try:    
         view_profile = User.objects.get(username = view_profile).gbookprofile
     except:
         raise Http404
         
-    post_count = Theme.objects.filter(theme_start_user = profile).count() + ThemeAnswers.objects.filter(theme_answer_user = profile).count()
     next_datetime_add_karma = view_profile.karma_points_last_add + datetime.timedelta(days=3)
     return render_to_response('gbook/view_profile.html', 
                               locals(),
@@ -1011,7 +1012,7 @@ def gbook_admin_manage_profile(request,manage_profile):
         new_private_messages = PrivateMessages.objects.filter(current_profile = profile).filter(message_status = 'unread') 
         new_messages_from_unregistered = AnswersFromUnregistered.objects.all()
         manage_profile = User.objects.get(username = manage_profile).gbookprofile   
-        post_count = Theme.objects.filter(theme_start_user = user).count() + ThemeAnswers.objects.filter(theme_answer_user = user).count()
+        post_count = Theme.objects.filter(theme_start_user = manage_profile).count() + ThemeAnswers.objects.filter(theme_answer_user = manage_profile).count()
         next_datetime_add_karma = manage_profile.karma_points_last_add + datetime.timedelta(days=3)
         if request.method == 'POST':
             form = AdminGbookProfileForm(request.POST,request.FILES,error_class=FormErrorList)

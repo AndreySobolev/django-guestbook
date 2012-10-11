@@ -1,2 +1,2 @@
 make 11.09.2012 10:09:59 by Sobolev Andrey
-django guestbook 1.2 release
+django guestbook 1.2.1 release

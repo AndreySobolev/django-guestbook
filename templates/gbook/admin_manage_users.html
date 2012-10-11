@@ -10,12 +10,12 @@
 {% include "gbook/_menu.html" %}
 </div>
 
-{% autopaginate gbook_profiles 40 %}
+{% autopaginate gbook_profiles 20 %}
 
 <table class="etc-table">
     <thead>
         <tr>
-            <td>
+            <td> Total users: {{ gbook_profiles.count }}
             </td>   
         </tr>
     </thead>

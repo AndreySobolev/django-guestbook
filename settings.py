@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 import sys
 
@@ -40,7 +39,7 @@ MEDIA_URL = '/media'
 STATIC_URL = '/static'
 
 
-SECRET_KEY = 'asdkjfasdfalasfgasfgasd1232sfdfsdf3'
+SECRET_KEY = 'asdkjgaddfalasfgasfgasd1232sfdfsdf3'
 
 
 TEMPLATE_LOADERS = (
