@@ -1200,7 +1200,7 @@ def gbook_admin_manage_users(request):
         new_private_messages = PrivateMessages.objects.filter(current_profile = profile).filter(message_status = 'unread')        
         new_messages_from_unregistered = AnswersFromUnregistered.objects.all()
         gbook_profiles = GbookProfile.objects.all()
- 
+        gbook_profiles_count = GbookProfile.objects.count()
         return render_to_response('gbook/admin_manage_users.html', 
                                   locals(), 
                                   context_instance=RequestContext(request))

@@ -23,7 +23,10 @@ class AuthorizationForm(forms.Form):
 
         try:
             user = User.objects.get(username = user)
+            if not user.is_active:
+                raise forms.ValidationError("Wait email confirmation")              
             profile = user.gbookprofile
+  
         except:
             raise forms.ValidationError("No such user")
         

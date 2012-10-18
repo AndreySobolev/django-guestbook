@@ -39,7 +39,7 @@ MEDIA_URL = '/media'
 STATIC_URL = '/static'
 
 
-SECRET_KEY = 'asdkjgaddfalasfgasfgasd1232sfdfsdf3'
+SECRET_KEY = 'asdkjfasdfalasfgasfgasd6609sfdfsdf3'
 
 
 TEMPLATE_LOADERS = (
