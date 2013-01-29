@@ -328,7 +328,7 @@ def gbook_edit_answer(request, answer):
     return HttpResponseRedirect(reverse('gbook_view'))    
 
 
-def gbook_delete_theme(request, delete_theme):
+def gbook_delete_theme(request, theme):
 
     user, profile = gbook_authorization(request) 
         
@@ -336,7 +336,7 @@ def gbook_delete_theme(request, delete_theme):
     if user.is_authenticated() and user.gbookprofile.banned == False: 
        
         try:
-            delete_theme = Theme.objects.get(id = delete_theme)
+            delete_theme = Theme.objects.get(id = theme,fk_to_profile = profile)
         except:
             raise Http404 
             
