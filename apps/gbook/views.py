@@ -9,7 +9,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext 
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q  
-from django.utils.html import escape
+
 from django.core.urlresolvers import reverse
 from settings import *
 from settings import GBOOK_SECTIONS
@@ -154,7 +154,7 @@ def gbook_submit(request, theme):
                 if theme == 'new_theme':
                     Theme(theme_start_user = user, 
                               theme_start_datetime = datetime_now, 
-                              theme_start_message_text = escape(send_data['message']), 
+                              theme_start_message_text = send_data['message'], 
                               theme_changetime = datetime_now,
                               section = send_data['section'],
                               fk_to_profile_id = user.id).save()
@@ -191,7 +191,7 @@ def gbook_submit_answer(request, theme):
                 datetime_now = datetime.datetime.now()        
                 ThemeAnswers(theme_answer_user = user, 
                              theme_answer_datetime = datetime_now, 
-                             theme_answer_message_text = escape(send_data['message']),
+                             theme_answer_message_text = send_data['message'],
                              fk_to_theme_id = theme,
                              fk_to_profile_id = user.id).save() 
                 Theme.objects.filter(id = theme).update(theme_changetime = datetime_now)
@@ -217,9 +217,9 @@ def gbook_submit_unregistered(request, theme):
             datetime_now = datetime.datetime.now() 
             custom_password = random.randint(100000, 999999)              
             if theme == 'new_theme':
-                AnswersFromUnregistered(unregistered_user = escape(send_data['unregistered_user']),
+                AnswersFromUnregistered(unregistered_user = send_data['unregistered_user'],
                           unregistered_user_has_password = custom_password,                          
-                          unregistered_user_send_message = escape(send_data['unregistered_user_send_message']),
+                          unregistered_user_send_message = send_data['unregistered_user_send_message'],
                           unregistered_message_to_theme = 'new_theme',
                           unregistered_message_section = send_data['section'],
                           unregistered_user_need_registration = send_data['unregistered_user_need_registration'],
@@ -252,9 +252,9 @@ def gbook_submit_unregistered_answer(request, theme):
             send_data = form.cleaned_data  
             datetime_now = datetime.datetime.now()
             custom_password = random.randint(100000, 999999)
-            AnswersFromUnregistered(unregistered_user = escape(send_data['unregistered_user']),
+            AnswersFromUnregistered(unregistered_user = send_data['unregistered_user'],
                       unregistered_user_has_password = custom_password,                            
-                      unregistered_user_send_message = escape(send_data['unregistered_user_send_message']),
+                      unregistered_user_send_message = send_data['unregistered_user_send_message'],
                       unregistered_message_to_theme = theme,
                       unregistered_user_need_registration = send_data['unregistered_user_need_registration'],
                       unregistered_user_email = send_data['unregistered_user_email'],                      
@@ -615,14 +615,14 @@ def gbook_send_message(request, message_to_profile):
                 PrivateMessages(message_to_user = message_to_profile,
                                 message_from_user = user,
                                 current_profile = to_user.gbookprofile,
-                                message_text = escape(send_data['message_text']), 
+                                message_text = send_data['message_text'], 
                                 message_send_time = datetime_now, 
                                 message_status = 'unread').save()
                 # dublicate message for yourself               
                 PrivateMessages(message_to_user = message_to_profile,
                                 message_from_user = user,
                                 current_profile = profile,
-                                message_text = escape(send_data['message_text']), 
+                                message_text = send_data['message_text'], 
                                 message_send_time = datetime_now, 
                                 message_status = 'send').save()                            
                 return HttpResponseRedirect(reverse('gbook_private_messages'))
@@ -686,14 +686,14 @@ def gbook_show_chat(request, with_profile):
                 PrivateMessages(message_to_user = with_profile,
                                 message_from_user = user,
                                 current_profile = with_profile_obj,
-                                message_text = escape(send_data['message_text']), 
+                                message_text = send_data['message_text'], 
                                 message_send_time = datetime_now, 
                                 message_status = 'unread').save()
                 # dublicate message for yourself               
                 PrivateMessages(message_to_user = with_profile,
                                 message_from_user = user, 
                                 current_profile = profile,
-                                message_text = escape(send_data['message_text']), 
+                                message_text = send_data['message_text'], 
                                 message_send_time = datetime_now, 
                                 message_status = 'send').save() 
                 return HttpResponseRedirect('')
