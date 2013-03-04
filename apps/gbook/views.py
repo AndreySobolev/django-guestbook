@@ -157,7 +157,7 @@ def gbook_submit(request, theme):
                               theme_start_message_text = send_data['message'], 
                               theme_changetime = datetime_now,
                               section = send_data['section'],
-                              fk_to_profile_id = user.id).save()
+                              fk_to_profile_id = profile.id).save()
                     return HttpResponseRedirect(reverse('gbook_view'))
                 else:
                     return HttpResponseRedirect(reverse('gbook_view'))    
@@ -193,7 +193,7 @@ def gbook_submit_answer(request, theme):
                              theme_answer_datetime = datetime_now, 
                              theme_answer_message_text = send_data['message'],
                              fk_to_theme_id = theme,
-                             fk_to_profile_id = user.id).save() 
+                             fk_to_profile_id = profile.id).save() 
                 Theme.objects.filter(id = theme).update(theme_changetime = datetime_now)
                 return HttpResponseRedirect(reverse('gbook_view'))    
         else:          
@@ -567,8 +567,7 @@ def gbook_change_password(request):
     if user.is_authenticated() and user.gbookprofile.banned == False: 
         new_private_messages = new_private_messages = PrivateMessages.objects.filter(current_profile = profile).filter(message_status = 'unread')          
         if user.is_superuser == True: 
-            new_messages_from_unregistered = AnswersFromUnregistered.objects.all()
-        user_profile = GbookProfile.objects.get(id = user.id)      
+            new_messages_from_unregistered = AnswersFromUnregistered.objects.all()      
         post_count = Theme.objects.filter(theme_start_user = user).count() + ThemeAnswers.objects.filter(theme_answer_user = user).count() 
         if request.method == 'POST':
             form = ChangePasswordForm(request.POST,error_class=FormErrorList)
@@ -741,8 +740,7 @@ def gbook_change_karma(request, karma_delta, to_profile):
         if user.is_superuser == True: 
             new_messages_from_unregistered = AnswersFromUnregistered.objects.all()    
         datetime_now = datetime.datetime.now() 
-        karma_points = GbookProfile.objects.get(id = user.id)           
-        karma_points = karma_points.karma_points          
+        karma_points = profile.karma_points          
         if karma_points > 0:
             
             if karma_delta == 'add-karma':
@@ -761,7 +759,7 @@ def gbook_change_karma(request, karma_delta, to_profile):
                     
                     # get karma points to current user                
                     karma_points = karma_points - 1
-                    GbookProfile.objects.filter(user = user.id).update(karma_points = karma_points)  
+                    GbookProfile.objects.filter(user = profile.id).update(karma_points = karma_points)  
 
                     KarmaMessages(karma_to_user = to_profile,
                                   karma_from_user = user,
