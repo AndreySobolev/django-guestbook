@@ -265,7 +265,7 @@ def gbook_submit_unregistered_answer(request, theme):
     return render_to_response('gbook/gbook_submit_answer_unregistered.html', locals(),context_instance=RequestContext(request))      
 
  
-def gbook_edit_theme(request, edit_theme):
+def gbook_edit_theme(request, theme_id):
     
     user, profile = gbook_authorization(request) 
         
@@ -276,7 +276,7 @@ def gbook_edit_theme(request, edit_theme):
             new_messages_from_unregistered = AnswersFromUnregistered.objects.all()
         
         try:
-            edit_theme = Theme.objects.get(id = edit_theme)
+            edit_theme = Theme.objects.get(pk = theme_id)
         except:
             raise Http404
              
