@@ -265,7 +265,7 @@ def gbook_submit_unregistered_answer(request, theme):
     return render_to_response('gbook/gbook_submit_answer_unregistered.html', locals(),context_instance=RequestContext(request))      
 
  
-def gbook_edit_theme(request, theme_id):
+def gbook_edit_theme(request, theme):
     
     user, profile = gbook_authorization(request) 
         
